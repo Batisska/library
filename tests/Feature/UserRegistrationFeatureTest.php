@@ -7,7 +7,10 @@ use Tests\TestCase;
 
 class UserRegistrationFeatureTest extends TestCase
 {
-    public function test_user_registration_feature()
+    /**
+     * @return void
+     */
+    public function test_user_registration_feature(): void
     {
         $data = User::factory()->make();
 

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Features\UserRegistrationFeature;
+use App\Features\UserAuthenticationFeature;
 use Illuminate\Http\JsonResponse;
 use Lucid\Units\Controller;
 
-class RegisteredUserController extends Controller
+class AuthenticatedUserController extends Controller
 {
     /**
      * @return JsonResponse
      */
     public function store(): JsonResponse
     {
-        return $this->serve(UserRegistrationFeature::class);
+        return $this->serve(UserAuthenticationFeature::class);
     }
 }

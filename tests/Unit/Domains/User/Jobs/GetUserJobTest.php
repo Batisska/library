@@ -4,18 +4,18 @@ namespace Tests\Unit\Domains\User\Jobs;
 
 use App\Models\User;
 use Tests\TestCase;
-use App\Domains\User\Jobs\SaveUserJob;
+use App\Domains\User\Jobs\GetUserJob;
 
-class SaveUserJobTest extends TestCase
+class GetUserJobTest extends TestCase
 {
     /**
      * @retrun void
      */
-    public function test_save_user_job(): void
+    public function test_get_user_job(): void
     {
-        $user = User::factory()->make();
+        $user = User::factory()->create();
 
-        $job = new SaveUserJob($user->name, $user->email, 'password');
+        $job = new GetUserJob($user->email);
 
         $result = $job->handle();
 

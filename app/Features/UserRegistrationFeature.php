@@ -5,12 +5,17 @@ namespace App\Features;
 use App\Domains\User\Jobs\CreateTokenJob;
 use App\Domains\User\Jobs\SaveUserJob;
 use App\Domains\User\Requests\Registration;
+use Illuminate\Http\JsonResponse;
 use Lucid\Domains\Http\Jobs\RespondWithJsonJob;
 use Lucid\Units\Feature;
 
 class UserRegistrationFeature extends Feature
 {
-    public function handle(Registration $request)
+    /**
+     * @param Registration $request
+     * @return JsonResponse
+     */
+    public function handle(Registration $request): JsonResponse
     {
        $user = $this->run(SaveUserJob::class, [
             'email' => $request->input('email'),

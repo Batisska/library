@@ -16,11 +16,12 @@ class SaveUserJob extends Job
     private string $email;
 
     /**
-     * Create a new job instance.
-     *
-     * @return void
+     * SaveUserJob constructor.
+     * @param string $name
+     * @param string $email
+     * @param string $password
      */
-    public function __construct(string $name, string $password, string $email)
+    public function __construct(string $name, string $email, string $password)
     {
         $this->name = $name;
         $this->password = $password;
@@ -30,9 +31,9 @@ class SaveUserJob extends Job
     /**
      * Execute the job.
      *
-     * @return void
+     * @return User
      */
-    public function handle()
+    public function handle(): User
     {
         $attributes = [
             'email' => $this->email,
