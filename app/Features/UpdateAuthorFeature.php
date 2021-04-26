@@ -26,7 +26,8 @@ class UpdateAuthorFeature extends Feature
     {
         $this->run(UpdateAuthorJob::class, [
             'author' => $this->author,
-            'request' => $request,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

@@ -17,7 +17,8 @@ class StoreAuthorFeature extends Feature
     public function handle(StoreAuthor $request): JsonResponse
     {
         $author = $this->run(SaveAuthorJob::class,[
-            'input' => $request->input()
+            'last_name' => $request->input('last_name'),
+            'first_name' => $request->input('first_name')
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

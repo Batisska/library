@@ -19,8 +19,8 @@ class ListAuthorsFeatureTest extends TestCase
 
         $this->actingAs($user)->getJson(route('authors.index',[
             'limit' => 5,
-            'order' => 'first_name',
-            'orderBy' => 'desc',
+            'column' => 'first_name',
+            'desc' => 'desc',
         ]))
             ->assertJsonCount(5,'data.data')
             ->assertSuccessful();

@@ -18,7 +18,9 @@ class ListBooksFeature extends Feature
     public function handle(ListBooks $request): JsonResponse
     {
         $books = $this->run(GetListBooksJob::class,[
-          'request' => $request
+            'column' => $request->input('column'),
+            'desc' => $request->input('desc'),
+            'limit' => $request->input('limit'),
         ]);
 
        return $this->run(RespondWithJsonJob::class,[

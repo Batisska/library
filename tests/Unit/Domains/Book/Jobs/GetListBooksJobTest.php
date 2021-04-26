@@ -16,13 +16,13 @@ class GetListBooksJobTest extends TestCase
     {
         Book::factory()->count(10)->create();
 
-        $mockRequest = ListBooks::create(route('login'), 'GET', [
+        $data = [
             'limit' => 5,
-            'order' => 'title',
+            'order' => 'first_name',
             'orderBy' => 'desc',
-        ]);
+        ];
 
-        $job = new GetListBooksJob($mockRequest);
+        $job = new GetListBooksJob($data['order'],$data['orderBy'],$data['limit']);
 
         $result = $job->handle();
 

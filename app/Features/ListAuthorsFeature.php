@@ -5,7 +5,6 @@ namespace App\Features;
 use App\Domains\Author\Jobs\GetListAuthorsJob;
 use App\Domains\Author\Requests\ListAuthors;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Lucid\Domains\Http\Jobs\RespondWithJsonJob;
 use Lucid\Units\Feature;
 
@@ -18,7 +17,9 @@ class ListAuthorsFeature extends Feature
     public function handle(ListAuthors $request): JsonResponse
     {
         $books = $this->run(GetListAuthorsJob::class,[
-            'request' => $request
+            'column' => $request->input('column'),
+            'desc' => $request->input('desc'),
+            'limit' => $request->input('limit'),
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

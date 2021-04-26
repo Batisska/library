@@ -10,18 +10,30 @@ use Lucid\Units\Job;
 class GetListBooksJob extends Job
 {
     /**
-     * @var ListBooks
+     * @var string
      */
-    private ListBooks $request;
+    private string $column;
+
+    /**
+     * @var string
+     */
+    private string $desc;
+
+    /**
+     * @var string
+     */
+    private string $limit;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(ListBooks $request)
+    public function __construct(string $column, string $desc, string $limit)
     {
-        $this->request = $request;
+        $this->column = $column;
+        $this->desc = $desc;
+        $this->limit = $limit;
     }
 
     /**
@@ -31,7 +43,7 @@ class GetListBooksJob extends Job
      */
     public function handle(): LengthAwarePaginator
     {
-        return Book::orderBy($this->request->order ?? 'id', $this->request->order_desc ?? 'desc')
-            ->paginate($this->request->limit ?? 10);
+        return Book::orderBy($this->column ?? 'id', $this->desc ?? 'desc')
+            ->paginate($this->limit ?? 10);
     }
 }

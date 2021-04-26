@@ -19,12 +19,7 @@ class UpdateAuthorJobTest extends TestCase
         $first_name = $author->first_name.'_update';
         $last_name = $author->last_name.'_update';
 
-        $mockRequest = ListAuthors::create(route('login'), 'GET', [
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-        ]);
-
-        $job = new UpdateAuthorJob($author, $mockRequest);
+        $job = new UpdateAuthorJob($author, $first_name, $last_name);
         $job->handle();
 
         self::assertEquals($first_name,$author->first_name);

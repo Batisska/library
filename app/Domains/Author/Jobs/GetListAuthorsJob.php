@@ -3,22 +3,36 @@
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
-use App\Domains\Author\Requests\ListAuthors;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Lucid\Units\Job;
 
 class GetListAuthorsJob extends Job
 {
-    private ListAuthors $request;
+    /**
+     * @var string
+     */
+    private string $column;
+
+    /**
+     * @var string
+     */
+    private string $desc;
+
+    /**
+     * @var string
+     */
+    private string $limit;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(ListAuthors $request)
+    public function __construct(string $column, string $desc, string $limit)
     {
-        $this->request = $request;
+        $this->column = $column;
+        $this->desc = $desc;
+        $this->limit = $limit;
     }
 
     /**
@@ -28,7 +42,7 @@ class GetListAuthorsJob extends Job
      */
     public function handle(): LengthAwarePaginator
     {
-        return Author::orderBy($this->request->order ?? 'id', $this->request->order_desc ?? 'desc')
-            ->paginate($this->request->limit ?? 10);
+        return Author::orderBy($this->column ?? 'id', $this->desc ?? 'desc')
+            ->paginate($this->limit ?? 10);
     }
 }

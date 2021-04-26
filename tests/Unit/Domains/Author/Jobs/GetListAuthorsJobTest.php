@@ -16,13 +16,13 @@ class GetListAuthorsJobTest extends TestCase
     {
         Author::factory()->count(10)->create();
 
-        $mockRequest = ListAuthors::create(route('login'), 'GET', [
+        $data = [
             'limit' => 5,
             'order' => 'first_name',
             'orderBy' => 'desc',
-        ]);
+        ];
 
-        $job = new GetListAuthorsJob($mockRequest);
+        $job = new GetListAuthorsJob ($data['order'],$data['orderBy'],$data['limit']);
 
         $result = $job->handle();
 

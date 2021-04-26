@@ -15,7 +15,7 @@ class SaveAuthorJobTest extends TestCase
     {
         $author = Author::factory()->make();
 
-        $job = new SaveAuthorJob($author->toArray());
+        $job = new SaveAuthorJob($author->first_name, $author->last_name);
 
         $job->handle();
 

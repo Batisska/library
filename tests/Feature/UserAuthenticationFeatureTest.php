@@ -22,15 +22,4 @@ class UserAuthenticationFeatureTest extends TestCase
             ->assertJsonPath('data.user.email', $user->email)
             ->assertJsonPath('data.user.name', $user->name);
     }
-
-    /**
-     * @return void
-     */
-    public function test_get_user_info(): void
-    {
-       $user = User::factory()->create();
-
-       $this->actingAs($user)->get('/api/user')
-       ->assertSuccessful();
-    }
 }
