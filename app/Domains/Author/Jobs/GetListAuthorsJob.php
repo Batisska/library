@@ -19,16 +19,16 @@ class GetListAuthorsJob extends Job
     private string $desc;
 
     /**
-     * @var string
+     * @var int
      */
-    private string $limit;
+    private int $limit;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $column, string $desc, string $limit)
+    public function __construct(string $column, string $desc, int $limit)
     {
         $this->column = $column;
         $this->desc = $desc;

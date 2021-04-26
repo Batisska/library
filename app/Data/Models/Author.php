@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static orderBy(mixed $param, mixed $param1)
  * @method static create(array $input)
  * @method static count()
- * @property string first_name
- * @property string last_name
+ * @property string $first_name
+ * @property string $last_name
  */
 class Author extends Model
 {
