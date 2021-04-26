@@ -1,3 +1,4 @@
+- cp .env.example .env
 - composer install
 - sail up -d
 - php artisan migrate --seed and php artisan migrate --seed --env=testing   
