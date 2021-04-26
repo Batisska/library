@@ -2,7 +2,7 @@
 
 namespace App\Domains\User\Jobs;
 
-use App\Models\User;
+use App\Data\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Lucid\Units\Job;
 

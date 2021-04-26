@@ -3,7 +3,7 @@
 namespace Tests\Unit\Domains\User\Jobs;
 
 use App\Domains\User\Jobs\AuthenticateJob;
-use App\Models\User;
+use App\Data\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;

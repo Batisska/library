@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use App\Data\Models\User;
 use Tests\TestCase;
 
 class UserRegistrationFeatureTest extends TestCase

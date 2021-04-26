@@ -44,6 +44,7 @@ class AuthenticateJob extends Job
         }
 
         RateLimiter::clear($this->throttleKey());
+
         return true;
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Domains\User\Jobs;
 
-use App\Models\User;
+use App\Data\Models\User;
 use Lucid\Units\Job;
 
 class GetUserJob extends Job

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Domains\User\Jobs;
 
-use App\Models\User;
+use App\Data\Models\User;
 use Tests\TestCase;
 use App\Domains\User\Jobs\GetUserJob;
 

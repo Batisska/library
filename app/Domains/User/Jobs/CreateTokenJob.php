@@ -2,7 +2,7 @@
 
 namespace App\Domains\User\Jobs;
 
-use App\Models\User;
+use App\Data\Models\User;
 use Laravel\Sanctum\NewAccessToken;
 use Laravel\Sanctum\PersonalAccessToken;
 use Lucid\Units\Job;

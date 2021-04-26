@@ -21,7 +21,6 @@ class UserAuthenticationFeature extends Feature
         $this->run(AuthenticateJob::class, [
            'request' => $request
         ]);
-
         $user = $this->run(GetUserJob::class, [
            'email' => $request->input('email')
         ]);
