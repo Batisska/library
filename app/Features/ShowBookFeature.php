@@ -22,6 +22,8 @@ class ShowBookFeature extends Feature
      */
     public function handle(): JsonResponse
     {
+        $this->book->load('authors');
+
         return $this->run(RespondWithJsonJob::class,[
             'content' => $this->book
         ]);

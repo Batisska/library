@@ -35,13 +35,17 @@ class UpdateBookJob extends Job
     /**
      * Execute the job.
      *
-     * @return bool
+     * @return Book
      */
-    public function handle(): bool
+    public function handle(): Book
     {
-        return $this->book->update([
+        $this->book->update([
             'title' => $this->title,
             'description' => $this->description,
         ]);
+
+        $this->book->load('authors');
+
+        return $this->book;
     }
 }

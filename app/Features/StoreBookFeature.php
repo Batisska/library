@@ -19,6 +19,7 @@ class StoreBookFeature extends Feature
         $book = $this->run(SaveBookJob::class, [
             'title' => $request->input('title'),
             'description' => $request->input('description'),
+            'author_id' => $request->input('author_id'),
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

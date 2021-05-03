@@ -29,6 +29,8 @@ class GetAuthorJob extends Job
      */
     public function handle(): Author
     {
+        $this->author->load('books');
+
         return $this->author;
     }
 }

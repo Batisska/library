@@ -4,6 +4,8 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -22,4 +24,12 @@ class Book extends Model
         'title',
         'description',
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function authors(): BelongsToMany
+    {
+        return $this->belongsToMany(Author::class);
+    }
 }

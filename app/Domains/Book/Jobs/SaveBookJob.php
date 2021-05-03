@@ -12,16 +12,18 @@ class SaveBookJob extends Job
      */
     private string $title;
     private string $description;
+    private $author_id;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $title, string $description)
+    public function __construct(string $title, string $description, array $author_id)
     {
         $this->title = $title;
         $this->description = $description;
+        $this->author_id = $author_id;
     }
 
     /**
@@ -29,11 +31,17 @@ class SaveBookJob extends Job
      *
      * @return Book
      */
-    public function handle(): Book
+    public function handle(Book $book): Book
     {
-        return Book::create([
+        $book = $book->create([
             'title' => $this->title,
             'description' => $this->description,
         ]);
+
+        $book->authors()->attach($this->author_id);
+
+        $book->load('authors');
+
+        return $book;
     }
 }

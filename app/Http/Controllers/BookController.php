@@ -9,6 +9,7 @@ use App\Features\ShowBookFeature;
 use App\Features\StoreBookFeature;
 use App\Features\UpdateBookFeature;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -35,10 +36,11 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Request $request
      * @param Book $book
      * @return JsonResponse
      */
-    public function show(Book $book): JsonResponse
+    public function show(Request $request, Book $book): JsonResponse
     {
         return $this->serve(ShowBookFeature::class,[
             'book' => $book
