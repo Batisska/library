@@ -4,6 +4,7 @@ namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
 use App\Domains\Book\Requests\ListBooks;
+use Illuminate\Database\Eloquent\Model;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\GetListBooksJob;
 
@@ -22,9 +23,9 @@ class GetListBooksJobTest extends TestCase
             'orderBy' => 'desc',
         ];
 
-        $job = new GetListBooksJob($data['order'],$data['orderBy'],$data['limit']);
+        $job = new GetListBooksJob(column: $data['order'],desc: $data['orderBy'], limit: $data['limit']);
 
-        $result = $job->handle();
+        $result = $job->handle( new Book);
 
         self::assertEquals(5, $result->collect()->count());
         self::assertEquals(Book::count(), $result->total());

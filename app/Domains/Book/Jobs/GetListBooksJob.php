@@ -3,7 +3,6 @@
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
-use App\Domains\Book\Requests\ListBooks;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Lucid\Units\Job;
 
@@ -39,11 +38,12 @@ class GetListBooksJob extends Job
     /**
      * Execute the job.
      *
+     * @param Book $book
      * @return LengthAwarePaginator
      */
-    public function handle(): LengthAwarePaginator
+    public function handle(Book $book): LengthAwarePaginator
     {
-        return Book::orderBy($this->column ?? 'id', $this->desc ?? 'desc')
+        return $book->orderBy($this->column ?? 'id', $this->desc ?? 'desc')
             ->paginate($this->limit ?? 10);
     }
 }

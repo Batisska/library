@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Author extends Model
 {
     use HasFactory, SoftDeletes;
+
     /**
      * @var string[]
      */

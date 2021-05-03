@@ -2,7 +2,6 @@
 
 namespace App\Features;
 
-use App\Data\Models\Book;
 use App\Domains\Book\Jobs\GetListBooksJob;
 use App\Domains\Book\Requests\ListBooks;
 use Illuminate\Http\JsonResponse;

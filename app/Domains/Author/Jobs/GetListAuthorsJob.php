@@ -38,11 +38,12 @@ class GetListAuthorsJob extends Job
     /**
      * Execute the job.
      *
+     * @param Author $author
      * @return LengthAwarePaginator
      */
-    public function handle(): LengthAwarePaginator
+    public function handle(Author $author): LengthAwarePaginator
     {
-        return Author::orderBy($this->column ?? 'id', $this->desc ?? 'desc')
+        return $author->orderBy($this->column ?? 'id', $this->desc ?? 'desc')
             ->paginate($this->limit ?? 10);
     }
 }
