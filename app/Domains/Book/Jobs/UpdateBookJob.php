@@ -15,37 +15,37 @@ class UpdateBookJob extends Job
      * @var string
      */
     private string $description;
+
     /**
-     * @var Book
+     * @var int
      */
-    private Book $book;
+    private int $book_id;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Book $book,string $title, string $description)
+    public function __construct(int $book_id,string $title, string $description)
     {
         $this->title = $title;
         $this->description = $description;
-        $this->book = $book;
+        $this->book_id = $book_id;
     }
 
     /**
      * Execute the job.
      *
+     * @param Book $book
      * @return Book
      */
-    public function handle(): Book
+    public function handle(Book $book): Book
     {
-        $this->book->update([
+        $book->where('id',$this->book_id)->update([
             'title' => $this->title,
             'description' => $this->description,
         ]);
 
-        $this->book->load('authors');
-
-        return $this->book;
+        return $book->where('id',$this->book_id)->with('authors')->first();;
     }
 }

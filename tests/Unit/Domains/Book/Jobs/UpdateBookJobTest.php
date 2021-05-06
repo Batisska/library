@@ -19,8 +19,9 @@ class UpdateBookJobTest extends TestCase
         $title = $book->title.'_update';
         $description = $book->description.'_update';
 
-        $job = new UpdateBookJob($book, $title, $description);
-        $job->handle();
+        $job = new UpdateBookJob($book->id, $title, $description);
+
+        $book = $job->handle(new Book);
 
         self::assertEquals($title,$book->title);
         self::assertEquals($description,$book->description);

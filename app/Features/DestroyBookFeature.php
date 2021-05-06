@@ -11,11 +11,11 @@ use Lucid\Units\Feature;
 
 class DestroyBookFeature extends Feature
 {
-    private Book $book;
+    private int $book_id;
 
-    public function __construct(Book $book)
+    public function __construct(int $book_id)
     {
-        $this->book = $book;
+        $this->book_id = $book_id;
     }
 
     /**
@@ -24,7 +24,7 @@ class DestroyBookFeature extends Feature
     public function handle(): JsonResponse
     {
         $destroy = $this->run(DestroyBookJob::class,[
-            'book' => $this->book
+            'book_id' => $this->book_id
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

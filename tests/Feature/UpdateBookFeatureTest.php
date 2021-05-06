@@ -14,6 +14,7 @@ class UpdateBookFeatureTest extends TestCase
      */
     public function test_update_book_feature(): void
     {
+        $this->withoutExceptionHandling();
             $authors = Author::factory()->count(2)->create();
 
             $book = Book::factory()

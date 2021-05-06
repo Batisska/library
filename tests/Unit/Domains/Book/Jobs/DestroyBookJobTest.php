@@ -15,8 +15,8 @@ class DestroyBookJobTest extends TestCase
     {
         $book = Book::factory()->create();
 
-        $job = new DestroyBookJob($book);
-        $job->handle();
+        $job = new DestroyBookJob($book->id);
+        $job->handle(new Book);
 
         $this->assertSoftDeleted((new Book())->getTable(),[
             'id' => $book->id

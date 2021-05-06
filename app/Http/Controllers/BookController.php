@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Book;
 use App\Features\DestroyBookFeature;
 use App\Features\ListBooksFeature;
 use App\Features\ShowBookFeature;
@@ -37,39 +36,39 @@ class BookController extends Controller
      * Display the specified resource.
      *
      * @param Request $request
-     * @param Book $book
+     * @param int $book_id
      * @return JsonResponse
      */
-    public function show(Request $request, Book $book): JsonResponse
+    public function show(Request $request, int $book_id): JsonResponse
     {
         return $this->serve(ShowBookFeature::class,[
-            'book' => $book
+            'book_id' => $book_id
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Book $book
+     * @param int $book_id
      * @return JsonResponse
      */
-    public function update(Book $book): JsonResponse
+    public function update(int $book_id): JsonResponse
     {
         return $this->serve(UpdateBookFeature::class,[
-            'book' => $book
+            'book_id' => $book_id
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Book $book
+     * @param int $book_id
      * @return JsonResponse
      */
-    public function destroy(Book $book): JsonResponse
+    public function destroy(int $book_id): JsonResponse
     {
         return $this->serve(DestroyBookFeature::class,[
-            'book' => $book
+            'book_id' => $book_id
         ]);
     }
 }

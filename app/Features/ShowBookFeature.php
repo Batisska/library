@@ -3,6 +3,7 @@
 namespace App\Features;
 
 use App\Data\Models\Book;
+use App\Domains\Book\Jobs\GetBookByIdJob;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Lucid\Domains\Http\Jobs\RespondWithJsonJob;
@@ -10,11 +11,11 @@ use Lucid\Units\Feature;
 
 class ShowBookFeature extends Feature
 {
-    private Book $book;
+    private int $book_id;
 
-    public function __construct(Book $book)
+    public function __construct(int $book_id)
     {
-        $this->book = $book;
+        $this->book_id = $book_id;
     }
 
     /**
@@ -22,10 +23,12 @@ class ShowBookFeature extends Feature
      */
     public function handle(): JsonResponse
     {
-        $this->book->load('authors');
+        $book = $this->run(GetBookByIdJob::class,[
+            'book_id' => $this->book_id
+        ]);
 
         return $this->run(RespondWithJsonJob::class,[
-            'content' => $this->book
+            'content' => $book
         ]);
     }
 }
