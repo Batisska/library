@@ -2,20 +2,18 @@
 
 namespace App\Features;
 
-use App\Data\Models\Author;
 use App\Domains\Author\Jobs\GetAuthorJob;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Lucid\Domains\Http\Jobs\RespondWithJsonJob;
 use Lucid\Units\Feature;
 
 class ShowAuthorFeature extends Feature
 {
-    private Author $author;
+    private int $author_id;
 
-    public function __construct(Author $author)
+    public function __construct(int $author_id)
     {
-        $this->author = $author;
+        $this->author_id = $author_id;
     }
 
     /**
@@ -24,7 +22,7 @@ class ShowAuthorFeature extends Feature
     public function handle(): JsonResponse
     {
         $author = $this->run(GetAuthorJob::class,[
-            'author' => $this->author
+            'author_id' => $this->author_id
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

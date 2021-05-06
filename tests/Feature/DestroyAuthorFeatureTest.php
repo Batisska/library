@@ -4,8 +4,14 @@ namespace Tests\Feature;
 
 use App\Data\Models\Author;
 use App\Data\Models\User;
+use App\Features\DestroyAuthorFeature;
 use Tests\TestCase;
 
+/**
+ * Class DestroyAuthorFeatureTest
+ * @package Tests\Feature
+ * @see DestroyAuthorFeature
+ */
 class DestroyAuthorFeatureTest extends TestCase
 {
     /**

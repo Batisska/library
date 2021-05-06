@@ -8,29 +8,28 @@ use Lucid\Units\Job;
 class GetAuthorJob extends Job
 {
     /**
-     * @var Author
+     * @var int
      */
-    private Author $author;
+    private int $author_id;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Author $author)
+    public function __construct(int $author_id)
     {
-        $this->author = $author;
+        $this->author_id = $author_id;
     }
 
     /**
      * Execute the job.
      *
-     * @return Author
+     * @param Author $author
+     * @return mixed
      */
-    public function handle(): Author
+    public function handle(Author $author): mixed
     {
-        $this->author->load('books');
-
-        return $this->author;
+        return $author->where('id',$this->author_id)->with('books')->first();
     }
 }

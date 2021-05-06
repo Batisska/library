@@ -19,8 +19,9 @@ class UpdateAuthorJobTest extends TestCase
         $first_name = $author->first_name.'_update';
         $last_name = $author->last_name.'_update';
 
-        $job = new UpdateAuthorJob($author, $first_name, $last_name);
-        $job->handle();
+        $job = new UpdateAuthorJob($author->id, $first_name, $last_name);
+
+        $author = $job->handle(new Author);
 
         self::assertEquals($first_name,$author->first_name);
         self::assertEquals($last_name,$author->last_name);

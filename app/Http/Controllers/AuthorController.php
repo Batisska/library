@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Author;
 use App\Features\DestroyAuthorFeature;
 use App\Features\ListAuthorsFeature;
 use App\Features\ShowAuthorFeature;
@@ -35,39 +34,39 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Author $author
+     * @param int $id
      * @return JsonResponse
      */
-    public function show(Author $author): JsonResponse
+    public function show(int $id): JsonResponse
     {
         return $this->serve(ShowAuthorFeature::class,[
-            'author' => $author
+            'author_id' => $id
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Author $author
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(Author $author): JsonResponse
+    public function update(int $id): JsonResponse
     {
         return $this->serve(UpdateAuthorFeature::class,[
-            'author' => $author
+            'author_id' => $id
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Author $author
+     * @param int $id
      * @return JsonResponse
      */
-    public function destroy(Author $author): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         return $this->serve(DestroyAuthorFeature::class,[
-            'author' => $author
+            'author_id' => $id
         ]);
     }
 }

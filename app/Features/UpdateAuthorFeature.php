@@ -11,11 +11,14 @@ use Lucid\Units\Feature;
 
 class UpdateAuthorFeature extends Feature
 {
-    private Author $author;
+    /**
+     * @var int
+     */
+    private int $author_id;
 
-    public function __construct(Author $author)
+    public function __construct(int $author_id)
     {
-        $this->author = $author;
+        $this->author_id = $author_id;
     }
 
     /**
@@ -24,14 +27,14 @@ class UpdateAuthorFeature extends Feature
      */
     public function handle(Request $request): JsonResponse
     {
-        $this->run(UpdateAuthorJob::class, [
-            'author' => $this->author,
+        $author = $this->run(UpdateAuthorJob::class, [
+            'author_id' => $this->author_id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
         ]);
 
         return $this->run(RespondWithJsonJob::class,[
-            'content' => $this->author
+            'content' => $author
         ]);
     }
 }

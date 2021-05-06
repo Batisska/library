@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static orderBy(mixed $param, mixed $param1)
  * @method static create(array $input)
  * @method static count()
+ * @method where(string $string, int $author_id)
  * @property string $first_name
  * @property string $last_name
  */

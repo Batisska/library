@@ -11,12 +11,15 @@ use Lucid\Units\Feature;
 
 class DestroyAuthorFeature extends Feature
 {
-    private Author $author;
+    /**
+     * @var int
+     */
+    private int $author_id;
 
-    public function __construct(Author $author)
-    {
-        $this->author = $author;
-    }
+    public function __construct(int $author_id)
+   {
+       $this->author_id = $author_id;
+   }
 
     /**
      * @return JsonResponse
@@ -24,7 +27,7 @@ class DestroyAuthorFeature extends Feature
     public function handle(): JsonResponse
     {
         $destroy = $this->run(DestroyAuthorJob::class,[
-            'author' => $this->author
+            'author_id' => $this->author_id
         ]);
 
         return $this->run(RespondWithJsonJob::class,[

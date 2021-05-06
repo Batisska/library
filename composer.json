@@ -12,7 +12,8 @@
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.10",
         "laravel/tinker": "^2.5",
-        "lucidarch/lucid": "^1.0"
+        "lucidarch/lucid": "^1.0",
+        "spatie/data-transfer-object": "^3.1"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",

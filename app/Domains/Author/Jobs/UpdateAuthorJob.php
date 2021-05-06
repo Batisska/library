@@ -8,9 +8,9 @@ use Lucid\Units\Job;
 class UpdateAuthorJob extends Job
 {
     /**
-     * @var Author
+     * @var int
      */
-    private Author $author;
+    private int $author_id;
 
     /**
      * @var string
@@ -27,23 +27,25 @@ class UpdateAuthorJob extends Job
      *
      * @return void
      */
-    public function __construct(Author $author, string $first_name, string $last_name)
+    public function __construct(int $author_id, string $first_name, string $last_name)
     {
-        $this->author = $author;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
+        $this->author_id = $author_id;
     }
 
+
     /**
-     * Execute the job.
-     *
-     * @return bool
+     * @param Author $author
+     * @return mixed
      */
-    public function handle(): bool
+    public function handle(Author $author): mixed
     {
-        return $this->author->update([
+        $author->where('id',$this->author_id)->update([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
         ]);
+
+        return $author->where('id',$this->author_id)->first();
     }
 }

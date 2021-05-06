@@ -15,8 +15,8 @@ class DestroyAuthorJobTest extends TestCase
     {
         $author = Author::factory()->create();
 
-        $job = new DestroyAuthorJob($author);
-        $job->handle();
+        $job = new DestroyAuthorJob($author->id);
+        $job->handle(new Author);
 
         $this->assertSoftDeleted((new Author())->getTable(),[
             'id' => $author->id

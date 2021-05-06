@@ -4,9 +4,16 @@ namespace Tests\Feature;
 
 use App\Data\Models\Author;
 use App\Data\Models\User;
+use App\Domains\Author\Jobs\UpdateAuthorJob;
 use Tests\TestCase;
 use App\Features\UpdateAuthorFeature;
 
+/**
+ * Class UpdateAuthorFeatureTest
+ * @package Tests\Feature
+ * @see UpdateAuthorFeature
+ * @see UpdateAuthorJob
+ */
 class UpdateAuthorFeatureTest extends TestCase
 {
     /**
@@ -14,6 +21,8 @@ class UpdateAuthorFeatureTest extends TestCase
      */
     public function test_update_author_feature(): void
     {
+        $this->withoutExceptionHandling();
+
         $author = Author::factory()->create();
 
         $user = User::factory()->create();

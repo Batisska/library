@@ -15,8 +15,9 @@ class GetAuthorJobTest extends TestCase
     {
         $author = Author::factory()->create();
 
-        $job = new GetAuthorJob($author);
-        $result = $job->handle();
+        $job = new GetAuthorJob($author->id);
+
+        $result = $job->handle(new Author);
 
         self::assertEquals($result->id,$author->id);
 
