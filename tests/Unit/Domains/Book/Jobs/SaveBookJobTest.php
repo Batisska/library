@@ -15,9 +15,9 @@ class SaveBookJobTest extends TestCase
     public function test_save_book_job(): void
     {
         $book = Book::factory()->make();
-        $author = Author::factory()->create();
+        $author = Author::factory()->count(2)->create();
 
-        $job = new SaveBookJob($book->title, $book->description,$author->pluck('id')->toArray());
+        $job = new SaveBookJob($book->title, $book->description, $author->pluck('id')->toArray());
 
         $job->handle(new Book);
 

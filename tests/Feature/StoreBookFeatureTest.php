@@ -15,6 +15,7 @@ class StoreBookFeatureTest extends TestCase
      */
     public function test_store_book_feature(): void
     {
+        $this->withoutExceptionHandling();
         $book = Book::factory()->make();
         $authors = Author::factory()->count(2)->create();
 

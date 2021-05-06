@@ -12,14 +12,14 @@ class SaveBookJob extends Job
      */
     private string $title;
     private string $description;
-    private int $author_id;
+    private array $author_id;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $title, string $description, int $author_id)
+    public function __construct(string $title, string $description, array $author_id)
     {
         $this->title = $title;
         $this->description = $description;
