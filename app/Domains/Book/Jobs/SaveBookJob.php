@@ -11,13 +11,23 @@ class SaveBookJob extends Job
      * @var string
      */
     private string $title;
+
+    /**
+     * @var string
+     */
     private string $description;
+
+    /**
+     * @var array
+     */
     private array $author_id;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param string $title
+     * @param string $description
+     * @param array $author_id
      */
     public function __construct(string $title, string $description, array $author_id)
     {
@@ -29,6 +39,7 @@ class SaveBookJob extends Job
     /**
      * Execute the job.
      *
+     * @param Book $book
      * @return Book
      */
     public function handle(Book $book): Book

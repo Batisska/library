@@ -26,7 +26,9 @@ class GetListBooksJob extends Job
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param string $column
+     * @param string $desc
+     * @param int $limit
      */
     public function __construct(string $column, string $desc, int $limit)
     {

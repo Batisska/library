@@ -12,16 +12,18 @@ use Illuminate\Validation\ValidationException;
 
 class AuthenticateJob extends Job
 {
+    /**
+     * @var Request
+     */
     protected Request $request;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Request $request
      */
     public function __construct(Request $request)
     {
-        //
         $this->request = $request;
     }
     /**

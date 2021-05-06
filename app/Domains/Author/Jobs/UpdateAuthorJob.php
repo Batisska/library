@@ -25,7 +25,9 @@ class UpdateAuthorJob extends Job
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param int $author_id
+     * @param string $first_name
+     * @param string $last_name
      */
     public function __construct(int $author_id, string $first_name, string $last_name)
     {

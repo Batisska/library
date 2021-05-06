@@ -20,7 +20,8 @@ class SaveAuthorJob extends Job
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param string $first_name
+     * @param string $last_name
      */
     public function __construct(string $first_name, string $last_name)
     {

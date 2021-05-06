@@ -6,13 +6,25 @@ use App\Data\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Lucid\Units\Job;
 
+/**
+ * Class SaveUserJob
+ * @package App\Domains\User\Jobs
+ */
 class SaveUserJob extends Job
 {
     /**
      * @var string
      */
     private string $name;
+
+    /**
+     * @var string
+     */
     private string $password;
+
+    /**
+     * @var string
+     */
     private string $email;
 
     /**

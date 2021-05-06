@@ -11,6 +11,7 @@ class UpdateBookJob extends Job
      * @var string
      */
     private string $title;
+
     /**
      * @var string
      */
@@ -24,7 +25,9 @@ class UpdateBookJob extends Job
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param int $book_id
+     * @param string $title
+     * @param string $description
      */
     public function __construct(int $book_id,string $title, string $description)
     {

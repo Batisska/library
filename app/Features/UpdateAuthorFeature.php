@@ -16,6 +16,10 @@ class UpdateAuthorFeature extends Feature
      */
     private int $author_id;
 
+    /**
+     * UpdateAuthorFeature constructor.
+     * @param int $author_id
+     */
     public function __construct(int $author_id)
     {
         $this->author_id = $author_id;

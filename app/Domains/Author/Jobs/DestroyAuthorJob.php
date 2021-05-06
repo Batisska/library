@@ -22,7 +22,7 @@ class DestroyAuthorJob extends Job
 
     /**
      * Create a new job instance.
-     *
+     * @param int $author_id
      * @return void
      */
     public function __construct(int $author_id)

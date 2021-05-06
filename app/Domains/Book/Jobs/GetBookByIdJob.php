@@ -7,12 +7,15 @@ use Lucid\Units\Job;
 
 class GetBookByIdJob extends Job
 {
+    /**
+     * @var int
+     */
     private int $book_id;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param int $book_id
      */
     public function __construct(int $book_id)
     {
@@ -22,6 +25,7 @@ class GetBookByIdJob extends Job
     /**
      * Execute the job.
      *
+     * @param Book $book
      * @return mixed
      */
     public function handle(Book $book): mixed

@@ -4,6 +4,10 @@ namespace App\Domains\User\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class Login
+ * @package App\Domains\User\Requests
+ */
 class Login extends FormRequest
 {
     /**
@@ -11,7 +15,7 @@ class Login extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +25,7 @@ class Login extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => 'required|string|email',

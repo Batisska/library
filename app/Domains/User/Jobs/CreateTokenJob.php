@@ -9,13 +9,21 @@ use Lucid\Units\Job;
 
 class CreateTokenJob extends Job
 {
+    /**
+     * @var User
+     */
     private User $user;
+
+    /**
+     * @var string
+     */
     private string $device;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param User $user
+     * @param string $device
      */
     public function __construct(User $user, string $device)
     {

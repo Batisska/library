@@ -9,8 +9,15 @@ use Lucid\Units\Feature;
 
 class ShowAuthorFeature extends Feature
 {
+    /**
+     * @var int
+     */
     private int $author_id;
 
+    /**
+     * ShowAuthorFeature constructor.
+     * @param int $author_id
+     */
     public function __construct(int $author_id)
     {
         $this->author_id = $author_id;

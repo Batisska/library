@@ -7,8 +7,15 @@ use Lucid\Units\Job;
 
 class DestroyBookJob extends Job
 {
+    /**
+     * @var int
+     */
     private int $book_id;
 
+    /**
+     * DestroyBookJob constructor.
+     * @param int $book_id
+     */
     public function __construct(int $book_id)
     {
         $this->book_id = $book_id;
@@ -17,6 +24,7 @@ class DestroyBookJob extends Job
     /**
      * Execute the job.
      *
+     * @param Book $book
      * @return bool
      */
     public function handle(Book $book): bool

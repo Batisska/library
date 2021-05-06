@@ -7,12 +7,15 @@ use Lucid\Units\Job;
 
 class GetUserJob extends Job
 {
+    /**
+     * @var string
+     */
     protected string $email;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param string $email
      */
     public function __construct(string $email)
     {

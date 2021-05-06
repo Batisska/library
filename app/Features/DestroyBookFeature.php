@@ -11,8 +11,15 @@ use Lucid\Units\Feature;
 
 class DestroyBookFeature extends Feature
 {
+    /**
+     * @var int
+     */
     private int $book_id;
 
+    /**
+     * DestroyBookFeature constructor.
+     * @param int $book_id
+     */
     public function __construct(int $book_id)
     {
         $this->book_id = $book_id;
