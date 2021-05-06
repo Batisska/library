@@ -37,9 +37,9 @@ class UpdateBookJob extends Job
      * Execute the job.
      *
      * @param Book $book
-     * @return Book
+     * @return mixed
      */
-    public function handle(Book $book): Book
+    public function handle(Book $book): mixed
     {
         $book->where('id',$this->book_id)->update([
             'title' => $this->title,

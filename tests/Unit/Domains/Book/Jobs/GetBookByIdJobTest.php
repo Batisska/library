@@ -9,7 +9,7 @@ use App\Domains\Book\Jobs\GetBookByIdJob;
 
 class GetBookByIdJobTest extends TestCase
 {
-    public function test_get_book_by_id_job()
+    public function test_get_book_by_id_job(): void
     {
         $authors = Author::factory()->count(2)->create();
         $book = Book::factory()
