@@ -3,8 +3,6 @@
 
 namespace App\Data\Repository;
 
-use App\Data\Models\Book;
-
 /**
  * Interface BookRepositoryInterface
  * @package App\Data\Repository

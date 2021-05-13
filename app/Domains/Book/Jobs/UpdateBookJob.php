@@ -2,7 +2,6 @@
 
 namespace App\Domains\Book\Jobs;
 
-use App\Data\Repository\BookRepository;
 use App\Data\Repository\BookRepositoryInterface;
 use Lucid\Units\Job;
 
@@ -40,7 +39,7 @@ class UpdateBookJob extends Job
     /**
      * Execute the job.
      *
-     * @param BookRepository $book
+     * @param BookRepositoryInterface $book
      * @return mixed
      */
     public function handle(BookRepositoryInterface $book): mixed

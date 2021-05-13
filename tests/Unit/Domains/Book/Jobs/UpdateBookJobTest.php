@@ -5,8 +5,6 @@ namespace Tests\Unit\Domains\Book\Jobs;
 use App\Data\Models\Author;
 use App\Data\Models\Book;
 use App\Data\Repository\BookRepository;
-use App\Data\Repository\BookRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\UpdateBookJob;
 
