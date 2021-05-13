@@ -3,7 +3,7 @@
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
-use App\Data\Repository\ReadBook;
+use App\Data\Repository\Book\ReadBook;
 use Lucid\Units\Job;
 
 class GetBookByIdJob extends Job

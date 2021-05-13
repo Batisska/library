@@ -3,6 +3,7 @@
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\WriteAuthor;
 use Tests\TestCase;
 use App\Domains\Author\Jobs\DestroyAuthorJob;
 
@@ -13,13 +14,15 @@ class DestroyAuthorJobTest extends TestCase
      */
     public function test_destroy_author_job(): void
     {
-        $author = Author::factory()->create();
+        $job = new DestroyAuthorJob(1);
 
-        $job = new DestroyAuthorJob($author->id);
-        $job->handle(new Author);
+        $stub = $this->createMock(WriteAuthor::class);
 
-        $this->assertSoftDeleted((new Author())->getTable(),[
-            'id' => $author->id
-        ]);
+        $stub->method('destroy')
+             ->willReturn(true);
+
+        $result = $job->handle($stub);
+
+        self::assertTrue($result);
     }
 }

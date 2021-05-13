@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Features;
+namespace Tests\Features\Book;
 
 use App\Data\Models\Book;
 use App\Data\Models\User;
-use App\Data\Repository\ReadBook;
+use App\Data\Repository\Book\ReadBook;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Mockery;
 use Mockery\MockInterface;

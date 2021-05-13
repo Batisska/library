@@ -1,10 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Features\Author;
 
 use App\Data\Models\Author;
 use App\Data\Models\Book;
 use App\Data\Models\User;
+use App\Data\Repository\Author\ReadAuthor;
+use App\Data\Repository\Book\ReadBook;
+use Mockery;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class ShowAuthorFeatureTest extends TestCase
@@ -14,15 +18,22 @@ class ShowAuthorFeatureTest extends TestCase
      */
     public function test_show_author_feature(): void
     {
-        $books = Book::factory()->count(5)->create();
+        $books = Book::factory()->count(5)->make();
 
         $author = Author::factory()
             ->hasAttached($books)
-            ->create();
+            ->make();
 
-        $user = User::factory()->create();
+        $author->setRelation('books', $books);
 
-        $this->actingAs($user)->getJson(route('authors.show', $author->id))
+        $user = User::factory()->make();
+
+        $this->instance(ReadAuthor::class, Mockery::mock(ReadAuthor::class, function (MockInterface $mock) use ($author) {
+            $mock->shouldReceive('find')->once()->andReturn($author);
+        }));
+
+
+        $this->actingAs($user)->getJson(route('authors.show', 1))
             ->assertSuccessful()
             ->assertJsonPath('data.id',$author->id)
             ->assertJsonPath('data.books.*.id',$books->pluck('id')->toArray())

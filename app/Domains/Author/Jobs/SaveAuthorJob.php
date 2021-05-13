@@ -3,6 +3,8 @@
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\WriteAuthor;
+use Illuminate\Database\Eloquent\Model;
 use Lucid\Units\Job;
 
 class SaveAuthorJob extends Job
@@ -32,11 +34,12 @@ class SaveAuthorJob extends Job
     /**
      * Execute the job.
      *
-     * @return Author
+     * @param WriteAuthor $author
+     * @return Model
      */
-    public function handle(): Author
+    public function handle(WriteAuthor $author): Model
     {
-        return Author::create([
+        return $author->create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
         ]);

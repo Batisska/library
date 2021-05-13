@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Data\Repository;
+namespace App\Data\Repository\Book;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

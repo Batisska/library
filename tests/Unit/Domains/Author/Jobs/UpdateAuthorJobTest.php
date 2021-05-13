@@ -3,6 +3,7 @@
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\AuthorRepository;
 use App\Domains\Author\Requests\ListAuthors;
 use Tests\TestCase;
 use App\Domains\Author\Jobs\UpdateAuthorJob;
@@ -14,16 +15,23 @@ class UpdateAuthorJobTest extends TestCase
      */
     public function test_update_author_job(): void
     {
-        $author = Author::factory()->create();
+        $author = Author::factory()->make();
 
-        $first_name = $author->first_name.'_update';
-        $last_name = $author->last_name.'_update';
+        $job = new UpdateAuthorJob(1, $author->first_name, $author->last_name);
 
-        $job = new UpdateAuthorJob($author->id, $first_name, $last_name);
+        $stub = $this->createMock(AuthorRepository::class);
 
-        $author = $job->handle(new Author);
+        $stub->method('update')
+             ->willReturn(true);
 
-        self::assertEquals($first_name,$author->first_name);
-        self::assertEquals($last_name,$author->last_name);
+        $updateAuthor = Author::factory()->make();
+
+        $stub->method('find')
+             ->willReturn($updateAuthor);
+
+        $author = $job->handle($stub,$stub);
+
+        self::assertEquals($updateAuthor->first_name,$author->first_name);
+        self::assertEquals($updateAuthor->last_name,$author->last_name);
     }
 }

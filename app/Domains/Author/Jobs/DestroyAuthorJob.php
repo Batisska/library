@@ -3,6 +3,7 @@
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\WriteAuthor;
 use Lucid\Units\Job;
 use Tests\Feature\DestroyAuthorFeatureTest;
 use Tests\Unit\Domains\Author\Jobs\DestroyAuthorJobTest;
@@ -33,11 +34,11 @@ class DestroyAuthorJob extends Job
     /**
      * Execute the job.
      *
-     * @param Author $author
+     * @param WriteAuthor $author
      * @return bool|null
      */
-    public function handle(Author $author): ?bool
+    public function handle(WriteAuthor $author): ?bool
     {
-        return $author->where('id',$this->author_id)->delete();
+        return $author->destroy($this->author_id);
     }
 }

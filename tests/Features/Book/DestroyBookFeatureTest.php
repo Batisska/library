@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Features;
+namespace Tests\Features\Book;
 
 use App\Data\Models\Book;
 use App\Data\Models\User;
-use App\Data\Repository\ReadBook;
-use App\Data\Repository\WriteBook;
+use App\Data\Repository\Book\WriteBook;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -17,7 +16,7 @@ class DestroyBookFeatureTest extends TestCase
      */
     public function test_destroy_book_feature(): void
     {
-        $book = Book::factory()->make();
+        Book::factory()->make();
 
         $this->instance(WriteBook::class, Mockery::mock(WriteBook::class, function (MockInterface $mock) {
             $mock->shouldReceive('destroy')->once()->andReturn(true);
@@ -25,7 +24,9 @@ class DestroyBookFeatureTest extends TestCase
 
         $user = User::factory()->make();
 
-        $this->actingAs($user)->deleteJson(route('books.destroy',1))
-            ->assertSuccessful();
+        $this->actingAs($user)
+            ->deleteJson(route('books.destroy',1))
+            ->assertSuccessful()
+            ->assertJsonPath('data',true);
     }
 }

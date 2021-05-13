@@ -1,12 +1,11 @@
 <?php
 
-namespace Tests\Features;
+namespace Tests\Features\Book;
 
 use App\Data\Models\Author;
 use App\Data\Models\Book;
 use App\Data\Models\User;
-use App\Data\Repository\ReadBook;
-use App\Data\Repository\WriteBook;
+use App\Data\Repository\Book\ReadBook;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -34,6 +33,8 @@ class ShowBookFeatureTest extends TestCase
              ->getJson(route('books.show', 10))
              ->assertSuccessful()
              ->assertJsonPath('data.id', $book->id)
+             ->assertJsonPath('data.title', $book->title)
+             ->assertJsonPath('data.description', $book->description)
              ->assertJsonPath('data.authors.*.id', $authors->pluck('id')->toArray())
              ->assertJsonPath('data.authors.*.first_name', $authors->pluck('first_name')->toArray())
              ->assertJsonPath('data.authors.*.last_name', $authors->pluck('last_name')->toArray());

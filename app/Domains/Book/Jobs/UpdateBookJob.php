@@ -2,8 +2,8 @@
 
 namespace App\Domains\Book\Jobs;
 
-use App\Data\Repository\ReadBook;
-use App\Data\Repository\WriteBook;
+use App\Data\Repository\Book\ReadBook;
+use App\Data\Repository\Book\WriteBook;
 use Lucid\Units\Job;
 
 class UpdateBookJob extends Job

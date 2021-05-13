@@ -3,8 +3,11 @@
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\ReadAuthor;
+use App\Data\Repository\Book\BookRepository;
 use App\Domains\Author\Requests\ListAuthors;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Tests\TestCase;
 use App\Domains\Author\Jobs\GetListAuthorsJob;
 
@@ -15,7 +18,7 @@ class GetListAuthorsJobTest extends TestCase
      */
     public function test_get_list_authors_job(): void
     {
-        Author::factory()->count(10)->create();
+        $authors = Author::factory()->count(5)->make();
 
         $data = [
             'limit' => 5,
@@ -23,12 +26,18 @@ class GetListAuthorsJobTest extends TestCase
             'orderBy' => 'desc',
         ];
 
-        $job = new GetListAuthorsJob ($data['order'],$data['orderBy'],$data['limit']);
+        $job = new GetListAuthorsJob($data['order'],$data['orderBy'],$data['limit']);
 
-        $result = $job->handle(new Author);
+        $stub = $this->createMock(originalClassName: ReadAuthor::class);
 
-        self::assertEquals(5, $result->collect()->count());
-        self::assertEquals(Author::count(), $result->total());
+        $paginator = new LengthAwarePaginator(items: $authors, total: 10, perPage: 5);
+
+        $stub->method('paginate')->willReturn($paginator);
+
+        $result = $job->handle($stub);
+
+        self::assertCount(5, $result->items());
+        self::assertEquals(10, $result->total());
 
     }
 }

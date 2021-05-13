@@ -3,6 +3,7 @@
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\WriteAuthor;
 use Tests\TestCase;
 use App\Domains\Author\Jobs\SaveAuthorJob;
 
@@ -17,11 +18,17 @@ class SaveAuthorJobTest extends TestCase
 
         $job = new SaveAuthorJob($author->first_name, $author->last_name);
 
-        $job->handle();
+        $stub = $this->createMock(WriteAuthor::class);
 
-        $this->assertDatabaseHas((new Author())->getTable(),[
-            'first_name' => $author->first_name,
-            'last_name' => $author->last_name,
-        ]);
+        $stub->method('create')
+             ->willReturn($author);
+
+        $stub->method('attach')
+             ->willReturn($author);
+
+        $result = $job->handle($stub);
+
+        self::assertEquals($author->first_name,$result['first_name']);
+        self::assertEquals($author->last_name,$result['last_name']);
     }
 }

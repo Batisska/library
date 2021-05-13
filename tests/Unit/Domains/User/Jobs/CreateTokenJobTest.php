@@ -2,10 +2,15 @@
 
 namespace Tests\Unit\Domains\User\Jobs;
 
+use App\Data\Models\PersonalAccessToken;
 use App\Data\Models\User;
+use App\Data\Repository\User\Token;
+use App\Data\Repository\User\TokenRepository;
+use App\Domains\User\Jobs\CreateTokenJob;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\NewAccessToken;
 use Tests\TestCase;
-use App\Domains\User\Jobs\CreateTokenJob;
 
 class CreateTokenJobTest extends TestCase
 {
@@ -14,11 +19,29 @@ class CreateTokenJobTest extends TestCase
      */
     public function test_create_token_job(): void
     {
-        $user = User::factory()->create();
+        $personalToken = PersonalAccessToken::factory()->count(2)->make();
+
+        $user = User::factory()->make();
+
+        $user->setRelation('tokens', $personalToken);
+
         $job = new CreateTokenJob($user, 'api_client');
 
-        $token = $job->handle();
+        $stub = $this->createMock(Token::class);
 
-        $this->assertEquals(get_class($token),NewAccessToken::class);
+        $stub->method('tokens')->willReturn($user->tokens());
+
+
+        $newPersonalToken = PersonalAccessToken::factory()->make();
+
+        $plainTextToken = $newPersonalToken->getKey() . '|' . Str::random(40);
+
+        $newPersonalToken = new NewAccessToken($newPersonalToken,$plainTextToken);
+
+        $stub->method('createToken')->willReturn($newPersonalToken);
+
+        $token = $job->handle($stub);
+
+        $this->assertEquals(NewAccessToken::class, get_class($token));
     }
 }

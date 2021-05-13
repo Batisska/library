@@ -3,6 +3,8 @@
 namespace Tests\Unit\Domains\User\Jobs;
 
 use App\Data\Models\User;
+use App\Data\Repository\User\ReadUser;
+use App\Data\Repository\User\WriteUser;
 use Tests\TestCase;
 use App\Domains\User\Jobs\SaveUserJob;
 
@@ -17,9 +19,14 @@ class SaveUserJobTest extends TestCase
 
         $job = new SaveUserJob($user->name, $user->email, 'password');
 
-        $result = $job->handle();
+        $stub = $this->createMock(WriteUser::class);
+
+        $stub->method('create')
+             ->willReturn($user);
+
+        $result = $job->handle($stub);
 
         $this->assertEquals(User::class, get_class($result));
-        $this->assertEquals($user->email, $result->email);
+        $this->assertEquals($user->email, $result['email']);
     }
 }
