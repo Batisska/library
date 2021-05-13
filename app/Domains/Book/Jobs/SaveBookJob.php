@@ -3,6 +3,9 @@
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
+use App\Data\Repository\BookRepository;
+use App\Data\Repository\WriteBook;
+use Illuminate\Database\Eloquent\Model;
 use Lucid\Units\Job;
 
 class SaveBookJob extends Job
@@ -39,20 +42,16 @@ class SaveBookJob extends Job
     /**
      * Execute the job.
      *
-     * @param Book $book
-     * @return Book
+     * @param WriteBook $book
+     * @return Model
      */
-    public function handle(Book $book): Book
+    public function handle(WriteBook $book): Model
     {
-        $book = $book->create([
-            'title' => $this->title,
+         $result = $book->create([
             'description' => $this->description,
+            'title' => $this->title,
         ]);
 
-        $book->authors()->attach($this->author_id);
-
-        $book->load('authors');
-
-        return $book;
+        return $book->attach($result, 'authors',$this->author_id);
     }
 }

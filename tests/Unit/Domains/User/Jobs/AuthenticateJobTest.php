@@ -5,6 +5,7 @@ namespace Tests\Unit\Domains\User\Jobs;
 use App\Domains\User\Jobs\AuthenticateJob;
 use App\Data\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
@@ -16,12 +17,16 @@ class AuthenticateJobTest extends TestCase
      */
     public function test_authenticate_job(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->make();
 
         $mockRequest = FormRequest::create(route('login'), 'GET', [
             'email' => $user->email,
             'password' => 'password',
         ]);
+
+        Auth::shouldReceive('attempt')
+            ->once()
+            ->andReturn(true);
 
         $job = new AuthenticateJob($mockRequest);
 

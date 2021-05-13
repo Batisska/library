@@ -4,6 +4,8 @@ namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Author;
 use App\Data\Models\Book;
+use App\Data\Repository\BookRepository;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\SaveBookJob;
 
@@ -14,16 +16,26 @@ class SaveBookJobTest extends TestCase
      */
     public function test_save_book_job(): void
     {
-        $book = Book::factory()->make();
-        $author = Author::factory()->count(2)->create();
+        $authors = Author::factory()->count(2)->make();
 
-        $job = new SaveBookJob($book->title, $book->description, $author->pluck('id')->toArray());
+        $book = Book::factory()->hasAttached($authors)->make();
 
-        $job->handle(new Book);
+        $book->setRelation('authors',$authors);
 
-        $this->assertDatabaseHas((new Book())->getTable(),[
-            'title' => $book->title,
-            'description' => $book->description,
-        ]);
+        $job = new SaveBookJob($book->title, $book->description, $authors->pluck('id')->toArray());
+
+        $stub = $this->createMock(BookRepository::class);
+
+        $stub->method('create')
+            ->willReturn($book);
+
+        $stub->method('attach')
+            ->willReturn($book);
+
+        $result = $job->handle($stub);
+
+        self::assertEquals($book->title,$result['title']);
+        self::assertEquals($book->description,$result['description']);
+        self::assertEquals($authors->pluck('first_name')->toArray(),$result['authors']->pluck('first_name')->toArray());
     }
 }

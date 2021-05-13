@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Author::factory(10)->create();
-        Book::factory(10)->create();
+        Book::factory()->count(10)->hasAttached(Author::factory()->count(2)->create())->create();
+        Book::factory()->count(2)->create();
+        Author::factory()->count(2)->create();
     }
 }
