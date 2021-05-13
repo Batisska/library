@@ -3,6 +3,7 @@
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\ReadAuthor;
 use Lucid\Units\Job;
 
 class GetAuthorJob extends Job
@@ -25,11 +26,11 @@ class GetAuthorJob extends Job
     /**
      * Execute the job.
      *
-     * @param Author $author
+     * @param ReadAuthor $author
      * @return mixed
      */
-    public function handle(Author $author): mixed
+    public function handle(ReadAuthor $author): mixed
     {
-        return $author->where('id',$this->author_id)->with('books')->first();
+        return $author->find($this->author_id);
     }
 }

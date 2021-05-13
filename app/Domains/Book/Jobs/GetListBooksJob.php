@@ -2,7 +2,7 @@
 
 namespace App\Domains\Book\Jobs;
 
-use App\Data\Repository\ReadBook;
+use App\Data\Repository\Book\ReadBook;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Lucid\Units\Job;
 

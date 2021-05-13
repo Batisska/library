@@ -12,6 +12,8 @@ use Laravel\Sanctum\Sanctum;
 /**
  * @method static whereEmail(string $email)
  * @method static where(string $string, string $email)
+ * @method static find(int $id)
+ * @method static create(array $attributes)
  * @property string $email
  * @property string $name
  */

@@ -3,6 +3,8 @@
 namespace App\Domains\User\Jobs;
 
 use App\Data\Models\User;
+use App\Data\Repository\User\Token;
+use App\Data\Repository\User\WriteUser;
 use Laravel\Sanctum\NewAccessToken;
 use Laravel\Sanctum\PersonalAccessToken;
 use Lucid\Units\Job;
@@ -27,7 +29,6 @@ class CreateTokenJob extends Job
      */
     public function __construct(User $user, string $device)
     {
-        //
         $this->user = $user;
         $this->device = $device;
     }
@@ -35,13 +36,15 @@ class CreateTokenJob extends Job
     /**
      * Execute the job.
      *
+     * @param Token $token
      * @return NewAccessToken
      */
-    public function handle(): NewAccessToken
+    public function handle(Token $token): NewAccessToken
     {
-        /** @var PersonalAccessToken $tokens */
-        $tokens = $this->user->tokens();
-        $tokens->delete();
-        return $this->user->createToken($this->device);
+        $tokens = $token->tokens($this->user);
+
+        $token->delete($tokens);
+
+        return $token->createToken($this->user,$this->device);
     }
 }

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
-use App\Data\Repository\BookRepository;
+use App\Data\Repository\Book\BookRepository;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\DestroyBookJob;
 

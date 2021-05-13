@@ -3,8 +3,8 @@
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
-use App\Data\Repository\BookRepository;
-use App\Data\Repository\WriteBook;
+use App\Data\Repository\Book\BookRepository;
+use App\Data\Repository\Book\WriteBook;
 use Illuminate\Database\Eloquent\Model;
 use Lucid\Units\Job;
 

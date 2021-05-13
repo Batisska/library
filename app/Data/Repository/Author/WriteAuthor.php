@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Data\Repository;
+namespace App\Data\Repository\Author;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Interface WriteModel
  * @package App\Data\Repository
  */
-interface WriteBook
+interface WriteAuthor
 {
     /**
      * @param int $id

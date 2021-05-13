@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Features;
+namespace Tests\Features\Book;
 
 use App\Data\Models\Author;
 use App\Data\Models\Book;
 use App\Data\Models\User;
-use App\Data\Repository\ReadBook;
-use App\Data\Repository\WriteBook;
+use App\Data\Repository\Book\ReadBook;
+use App\Data\Repository\Book\WriteBook;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;

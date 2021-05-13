@@ -3,6 +3,8 @@
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\ReadAuthor;
+use App\Data\Repository\Book\ReadBook;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Lucid\Units\Job;
 
@@ -39,12 +41,11 @@ class GetListAuthorsJob extends Job
     /**
      * Execute the job.
      *
-     * @param Author $author
+     * @param ReadAuthor $author
      * @return LengthAwarePaginator
      */
-    public function handle(Author $author): LengthAwarePaginator
+    public function handle(ReadAuthor $author): LengthAwarePaginator
     {
-        return $author->orderBy($this->column ?? 'id', $this->desc ?? 'desc')
-            ->paginate($this->limit ?? 10);
+        return $author->paginate($this->column ?? 'id', $this->desc ?? 'desc',$this->limit ?? 10);
     }
 }

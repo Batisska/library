@@ -8,7 +8,7 @@ use Faker\Factory;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, DatabaseMigrations;
+    use CreatesApplication;
 
     protected \Faker\Generator $faker;
 

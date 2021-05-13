@@ -3,6 +3,8 @@
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
+use App\Data\Repository\Author\ReadAuthor;
+use App\Data\Repository\Author\WriteAuthor;
 use Lucid\Units\Job;
 
 class UpdateAuthorJob extends Job
@@ -38,16 +40,17 @@ class UpdateAuthorJob extends Job
 
 
     /**
-     * @param Author $author
+     * @param WriteAuthor $writeAuthor
+     * @param ReadAuthor $readAuthor
      * @return mixed
      */
-    public function handle(Author $author): mixed
+    public function handle(WriteAuthor $writeAuthor, ReadAuthor $readAuthor): mixed
     {
-        $author->where('id',$this->author_id)->update([
+        $writeAuthor->update($this->author_id,[
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
         ]);
 
-        return $author->where('id',$this->author_id)->first();
+        return $readAuthor->find($this->author_id);
     }
 }
