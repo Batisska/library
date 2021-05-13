@@ -19,7 +19,7 @@ class DestroyBookJobTest extends TestCase
         $stub = $this->createMock(BookRepository::class);
 
         $stub->method('destroy')
-            ->willReturn(1);
+            ->willReturn(true);
 
         $result = $job->handle($stub);
 

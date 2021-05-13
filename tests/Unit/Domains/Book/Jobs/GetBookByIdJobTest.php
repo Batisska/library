@@ -4,6 +4,7 @@ namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Author;
 use App\Data\Models\Book;
+use App\Data\Repository\BookRepository;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\GetBookByIdJob;
 
@@ -11,14 +12,20 @@ class GetBookByIdJobTest extends TestCase
 {
     public function test_get_book_by_id_job(): void
     {
-        $authors = Author::factory()->count(2)->create();
+        $authors = Author::factory()->count(2)->make();
+
         $book = Book::factory()
             ->hasAttached($authors)
-            ->create();
+            ->make();
 
-        $job = new GetBookByIdJob($book->id);
+        $job = new GetBookByIdJob(book_id:1);
 
-        $result = $job->handle(new Book);
+        $stub = $this->createMock(BookRepository::class);
+
+        $stub->method('find')
+            ->willReturn($book);
+
+        $result = $job->handle($stub);
 
         self::assertEquals($result->id,$book->id);
         self::assertEquals($result->authors->toArray(),$book->authors->toArray());

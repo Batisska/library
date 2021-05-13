@@ -4,7 +4,9 @@
 namespace App\Data\Repository;
 
 use App\Data\Models\Book;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\Paginator;
 
 /**
  * Class BookRepository
@@ -31,11 +33,11 @@ class BookRepository implements BookRepositoryInterface
 
     /**
      * @param int $id
-     * @return int
+     * @return bool
      */
-    public function destroy(int $id): int
+    public function destroy(int $id): bool
     {
-        return Book::destroy($id);
+        return (bool)Book::destroy($id);
     }
 
     /**
@@ -46,5 +48,16 @@ class BookRepository implements BookRepositoryInterface
     public function update(int $id, array $attributes): bool
     {
         return (bool)Book::where('id',$id)->update($attributes);
+    }
+
+    /**
+     * @param string $column
+     * @param string $desc
+     * @param int $limit
+     * @return LengthAwarePaginator
+     */
+    public function paginate(string $column, string $desc, int $limit): LengthAwarePaginator
+    {
+        return Book::orderBy($column ?? 'id', $desc ?? 'desc')->paginate($limit);
     }
 }
