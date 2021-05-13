@@ -2,7 +2,7 @@
 
 namespace App\Domains\Book\Jobs;
 
-use App\Data\Repository\BookRepositoryInterface;
+use App\Data\Repository\ReadBook;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Lucid\Units\Job;
 
@@ -40,10 +40,10 @@ class GetListBooksJob extends Job
     /**
      * Execute the job.
      *
-     * @param BookRepositoryInterface $book
+     * @param ReadBook $book
      * @return LengthAwarePaginator
      */
-    public function handle(BookRepositoryInterface $book): LengthAwarePaginator
+    public function handle(ReadBook $book): LengthAwarePaginator
     {
         return $book->paginate($this->column ?? 'id', $this->desc ?? 'desc',$this->limit ?? 10);
     }

@@ -18,6 +18,8 @@ class GetBookByIdJobTest extends TestCase
             ->hasAttached($authors)
             ->make();
 
+        $book->setRelation('authors',$authors);
+
         $job = new GetBookByIdJob(book_id:1);
 
         $stub = $this->createMock(BookRepository::class);

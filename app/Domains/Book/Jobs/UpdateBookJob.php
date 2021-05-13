@@ -2,7 +2,8 @@
 
 namespace App\Domains\Book\Jobs;
 
-use App\Data\Repository\BookRepositoryInterface;
+use App\Data\Repository\ReadBook;
+use App\Data\Repository\WriteBook;
 use Lucid\Units\Job;
 
 class UpdateBookJob extends Job
@@ -39,10 +40,10 @@ class UpdateBookJob extends Job
     /**
      * Execute the job.
      *
-     * @param BookRepositoryInterface $book
+     * @param WriteBook $book
      * @return mixed
      */
-    public function handle(BookRepositoryInterface $book): mixed
+    public function handle(WriteBook $book): mixed
     {
         $book->update($this->book_id,[
             'title' => $this->title,

@@ -3,7 +3,7 @@
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
-use App\Data\Repository\BookRepositoryInterface;
+use App\Data\Repository\ReadBook;
 use Lucid\Units\Job;
 
 class GetBookByIdJob extends Job
@@ -26,10 +26,10 @@ class GetBookByIdJob extends Job
     /**
      * Execute the job.
      *
-     * @param BookRepositoryInterface $book
+     * @param ReadBook $book
      * @return mixed
      */
-    public function handle(BookRepositoryInterface $book): mixed
+    public function handle(ReadBook $book): mixed
     {
         return $book->find($this->book_id);
     }
