@@ -36,7 +36,7 @@ class UpdateBookJobTest extends TestCase
                 'authors' => $authors->toArray()
             ]);
 
-        $result = $job->handle($stub);
+        $result = $job->handle($stub,$stub);
 
         self::assertEquals($title,$result['title']);
         self::assertEquals($description,$result['description']);

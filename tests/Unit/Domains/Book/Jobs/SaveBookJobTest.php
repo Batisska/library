@@ -34,8 +34,8 @@ class SaveBookJobTest extends TestCase
 
         $result = $job->handle($stub);
 
-        self::assertEquals($book->title,$result->title);
-        self::assertEquals($book->description,$result->description);
-        self::assertEquals($authors->pluck('first_name')->toArray(),$result->authors->pluck('first_name')->toArray());
+        self::assertEquals($book->title,$result['title']);
+        self::assertEquals($book->description,$result['description']);
+        self::assertEquals($authors->pluck('first_name')->toArray(),$result['authors']->pluck('first_name')->toArray());
     }
 }

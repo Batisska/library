@@ -43,13 +43,13 @@ class UpdateBookJob extends Job
      * @param WriteBook $book
      * @return mixed
      */
-    public function handle(WriteBook $book): mixed
+    public function handle(WriteBook $book, ReadBook $readBook): mixed
     {
         $book->update($this->book_id,[
             'title' => $this->title,
             'description' => $this->description,
         ]);
 
-        return $book->find($this->book_id);
+        return $readBook->find($this->book_id);
     }
 }

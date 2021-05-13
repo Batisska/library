@@ -5,6 +5,7 @@ namespace Tests\Features;
 use App\Data\Models\Author;
 use App\Data\Models\Book;
 use App\Data\Models\User;
+use App\Data\Repository\ReadBook;
 use App\Data\Repository\WriteBook;
 use Mockery;
 use Mockery\MockInterface;
@@ -23,9 +24,12 @@ class UpdateBookFeatureTest extends TestCase
 
         $book->setRelation('authors', $authors);
 
-        $this->instance(WriteBook::class, Mockery::mock(WriteBook::class, function (MockInterface $mock) use ($book) {
-            $mock->shouldReceive('update')->once()->andReturn(true);
-            $mock->shouldReceive('find')->once()->andReturn($book);
+        $this->instance(WriteBook::class, Mockery::mock(WriteBook::class, function (MockInterface $mock) {
+            $mock->shouldReceive('update')->andReturn(true);
+        }));
+
+        $this->instance(ReadBook::class, Mockery::mock(ReadBook::class, function (MockInterface $mock) use ($book) {
+            $mock->shouldReceive('find')->andReturn($book);
         }));
 
         $user = User::factory()->make();
