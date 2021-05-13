@@ -5,6 +5,7 @@ namespace Database\Factories\Data\Models;
 
 use App\Data\Models\PersonalAccessToken;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PersonalAccessTokenFactory extends Factory
 {
@@ -20,12 +21,11 @@ class PersonalAccessTokenFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->title,
-            'tokenable_type' => $this->faker->title,
-            'tokenable_id' => $this->faker->title,
-            'name' => $this->faker->title,
-            'token' => $this->faker->title,
-            'abilities' => $this->faker->title,
+            'tokenable_type' => 'App\Data\Models\User',
+            'tokenable_id' => 1,
+            'name' => 'api_client',
+            'token' => hash('sha256', $plainTextToken = Str::random(40)),
+            'abilities' => ["*"],
         ];
     }
 }

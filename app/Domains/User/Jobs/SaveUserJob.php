@@ -3,6 +3,8 @@
 namespace App\Domains\User\Jobs;
 
 use App\Data\Models\User;
+use App\Data\Repository\User\WriteUser;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Lucid\Units\Job;
 
@@ -43,9 +45,10 @@ class SaveUserJob extends Job
     /**
      * Execute the job.
      *
-     * @return User
+     * @param WriteUser $user
+     * @return Model
      */
-    public function handle(): User
+    public function handle(WriteUser $user): Model
     {
         $attributes = [
             'email' => $this->email,
@@ -53,6 +56,6 @@ class SaveUserJob extends Job
             'password' => Hash::make($this->password),
         ];
 
-        return tap(new User($attributes))->save();
+        return $user->create($attributes);
     }
 }

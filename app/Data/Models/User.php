@@ -11,9 +11,9 @@ use Laravel\Sanctum\Sanctum;
 
 /**
  * @method static whereEmail(string $email)
- * @method static where(string $string, string $email)
  * @method static find(int $id)
  * @method static create(array $attributes)
+ * @method static where(string $column, string $operator, string $value)
  * @property string $email
  * @property string $name
  */
@@ -58,6 +58,6 @@ class User extends Authenticatable
      */
     public function tokens(): MorphMany
     {
-        return $this->morphMany(Sanctum::$personalAccessTokenModel, 'tokenable');
+        return $this->morphMany(PersonalAccessToken::class, 'tokenable');
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Domains\User\Jobs;
 
 use App\Data\Models\User;
+use App\Data\Repository\User\ReadUser;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Lucid\Units\Job;
 
 class GetUserJob extends Job
@@ -25,10 +28,11 @@ class GetUserJob extends Job
     /**
      * Execute the job.
      *
-     * @return User
+     * @param ReadUser $user
+     * @return Model
      */
-    public function handle(): User
+    public function handle(ReadUser $user): Model
     {
-        return User::where('email',$this->email)->firstOrFail();
+        return $user->firstOrFail('email',$this->email);
     }
 }

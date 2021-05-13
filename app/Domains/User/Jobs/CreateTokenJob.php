@@ -4,9 +4,7 @@ namespace App\Domains\User\Jobs;
 
 use App\Data\Models\User;
 use App\Data\Repository\User\Token;
-use App\Data\Repository\User\WriteUser;
 use Laravel\Sanctum\NewAccessToken;
-use Laravel\Sanctum\PersonalAccessToken;
 use Lucid\Units\Job;
 
 class CreateTokenJob extends Job
