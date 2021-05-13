@@ -41,10 +41,10 @@ class BookRepository implements BookRepositoryInterface
     /**
      * @param int $id
      * @param array $attributes
-     * @return int
+     * @return bool
      */
-    public function update(int $id, array $attributes): int
+    public function update(int $id, array $attributes): bool
     {
-        return Book::where('id',$id)->update($attributes);
+        return (bool)Book::where('id',$id)->update($attributes);
     }
 }

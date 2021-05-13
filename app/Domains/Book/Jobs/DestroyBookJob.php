@@ -3,6 +3,7 @@
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
+use App\Data\Repository\BookRepositoryInterface;
 use Lucid\Units\Job;
 
 class DestroyBookJob extends Job
@@ -24,11 +25,11 @@ class DestroyBookJob extends Job
     /**
      * Execute the job.
      *
-     * @param Book $book
+     * @param BookRepositoryInterface $book
      * @return bool
      */
-    public function handle(Book $book): bool
+    public function handle(BookRepositoryInterface $book): bool
     {
-        return $book->where('id',$this->book_id)->delete();
+        return (bool)$book->destroy($this->book_id);
     }
 }

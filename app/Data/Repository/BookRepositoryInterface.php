@@ -29,8 +29,8 @@ interface BookRepositoryInterface
     /**
      * @param int $id
      * @param array $attributes
-     * @return int
+     * @return bool
      */
-    public function update(int $id, array $attributes): int;
+    public function update(int $id, array $attributes): bool;
 
 }

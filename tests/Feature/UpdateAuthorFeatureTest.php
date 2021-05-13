@@ -21,8 +21,6 @@ class UpdateAuthorFeatureTest extends TestCase
      */
     public function test_update_author_feature(): void
     {
-        $this->withoutExceptionHandling();
-
         $author = Author::factory()->create();
 
         $user = User::factory()->create();

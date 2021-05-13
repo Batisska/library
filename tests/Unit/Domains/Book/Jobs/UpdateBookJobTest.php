@@ -27,7 +27,7 @@ class UpdateBookJobTest extends TestCase
         $stub = $this->createMock(BookRepository::class);
 
         $stub->method('update')
-            ->willReturn(1);
+            ->willReturn(true);
 
         $stub->method('find')
             ->willReturn([

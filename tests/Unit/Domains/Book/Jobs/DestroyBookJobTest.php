@@ -3,6 +3,7 @@
 namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
+use App\Data\Repository\BookRepository;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\DestroyBookJob;
 
@@ -13,13 +14,15 @@ class DestroyBookJobTest extends TestCase
      */
     public function test_destroy_book_job(): void
     {
-        $book = Book::factory()->create();
+        $job = new DestroyBookJob(1);
 
-        $job = new DestroyBookJob($book->id);
-        $job->handle(new Book);
+        $stub = $this->createMock(BookRepository::class);
 
-        $this->assertSoftDeleted((new Book())->getTable(),[
-            'id' => $book->id
-        ]);
+        $stub->method('destroy')
+            ->willReturn(1);
+
+        $result = $job->handle($stub);
+
+        self::assertTrue($result);
     }
 }
