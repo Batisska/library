@@ -2,7 +2,8 @@
 
 namespace App\Domains\Book\Jobs;
 
-use App\Data\Models\Book;
+use App\Data\Repository\BookRepository;
+use App\Data\Repository\BookRepositoryInterface;
 use Lucid\Units\Job;
 
 class UpdateBookJob extends Job
@@ -39,16 +40,16 @@ class UpdateBookJob extends Job
     /**
      * Execute the job.
      *
-     * @param Book $book
+     * @param BookRepository $book
      * @return mixed
      */
-    public function handle(Book $book): mixed
+    public function handle(BookRepositoryInterface $book): mixed
     {
-        $book->where('id',$this->book_id)->update([
+        $book->update($this->book_id,[
             'title' => $this->title,
             'description' => $this->description,
         ]);
 
-        return $book->where('id',$this->book_id)->with('authors')->first();;
+        return $book->find($this->book_id);
     }
 }

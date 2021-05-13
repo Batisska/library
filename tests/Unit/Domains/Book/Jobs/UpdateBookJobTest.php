@@ -2,8 +2,11 @@
 
 namespace Tests\Unit\Domains\Book\Jobs;
 
+use App\Data\Models\Author;
 use App\Data\Models\Book;
-use App\Domains\Book\Requests\ListBooks;
+use App\Data\Repository\BookRepository;
+use App\Data\Repository\BookRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use App\Domains\Book\Jobs\UpdateBookJob;
 
@@ -14,16 +17,31 @@ class UpdateBookJobTest extends TestCase
      */
     public function test_update_book_job(): void
     {
-        $book = Book::factory()->create();
+        $authors = Author::factory()->count(2)->make();
+
+        $book = Book::factory()->hasAttached($authors)->make();
 
         $title = $book->title.'_update';
         $description = $book->description.'_update';
 
-        $job = new UpdateBookJob($book->id, $title, $description);
+        $job = new UpdateBookJob(1, $title, $description);
 
-        $book = $job->handle(new Book);
+        $stub = $this->createMock(BookRepository::class);
 
-        self::assertEquals($title,$book->title);
-        self::assertEquals($description,$book->description);
+        $stub->method('update')
+            ->willReturn(1);
+
+        $stub->method('find')
+            ->willReturn([
+                'title' => $title,
+                'description' => $description,
+                'authors' => $authors->toArray()
+            ]);
+
+        $result = $job->handle($stub);
+
+        self::assertEquals($title,$result['title']);
+        self::assertEquals($description,$result['description']);
+        self::assertEquals($result['authors'],$authors->toArray());
     }
 }

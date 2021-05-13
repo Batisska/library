@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static orderBy(mixed $param, mixed $param1)
  * @method static create(array $array)
  * @method static count()
- * @method where(string $string, int $book_id)
+ * @method static where(string $string, int $book_id)
+ * @method static find($id)
  */
 class Book extends Model
 {
