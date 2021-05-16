@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Data\Models\Book;
@@ -31,13 +33,13 @@ class UpdateBookFeature extends Feature
      */
     public function handle(Request $request): JsonResponse
     {
-        $book = $this->run(UpdateBookJob::class,[
+        $book = $this->run(UpdateBookJob::class, [
             'book_id' => $this->book_id,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $book
         ]);
     }

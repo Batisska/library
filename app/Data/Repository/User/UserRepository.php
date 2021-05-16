@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Data\Repository\User;
 
@@ -28,7 +29,7 @@ class UserRepository implements ReadUser, WriteUser
      */
     public function firstOrFail(string $column, string $value, string $operator = '='): mixed
     {
-        return User::where($column,$operator,$value)->firstOrFail();
+        return User::where($column, $operator, $value)->firstOrFail();
     }
 
     /**
@@ -47,7 +48,7 @@ class UserRepository implements ReadUser, WriteUser
      */
     public function update(int $id, array $attributes): bool
     {
-        return (bool)User::where('id',$id)->update($attributes);
+        return (bool)User::where('id', $id)->update($attributes);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Data\Repository\User;
 
@@ -14,7 +15,6 @@ use Laravel\Sanctum\NewAccessToken;
  */
 class TokenRepository implements Token
 {
-
     /**
      * @param User $user
      * @return MorphMany
@@ -26,14 +26,14 @@ class TokenRepository implements Token
 
     public function createToken(User $user, string $device): NewAccessToken
     {
-       return $user->createToken($device);
+        return $user->createToken($device);
     }
 
     /**
      * @param MorphMany $tokens
      * @return bool|null
      */
-    public function delete(MorphMany $tokens): bool|null
+    public function delete(MorphMany $tokens): bool | null
     {
         return $tokens->delete();
     }

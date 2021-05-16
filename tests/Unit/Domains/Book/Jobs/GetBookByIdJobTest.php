@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Author;
@@ -18,7 +20,7 @@ class GetBookByIdJobTest extends TestCase
             ->hasAttached($authors)
             ->make();
 
-        $book->setRelation('authors',$authors);
+        $book->setRelation('authors', $authors);
 
         $job = new GetBookByIdJob(book_id:1);
 
@@ -29,7 +31,7 @@ class GetBookByIdJobTest extends TestCase
 
         $result = $job->handle($stub);
 
-        self::assertEquals($result->id,$book->id);
-        self::assertEquals($result->authors->toArray(),$book->authors->toArray());
+        self::assertEquals($result->id, $book->id);
+        self::assertEquals($result->authors->toArray(), $book->authors->toArray());
     }
 }

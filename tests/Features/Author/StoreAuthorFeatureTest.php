@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Author;
 
 use App\Data\Models\Author;
@@ -18,10 +20,12 @@ class StoreAuthorFeatureTest extends TestCase
     {
         $author = Author::factory()->make();
 
-        $this->instance(WriteAuthor::class,
-            Mockery::mock(WriteAuthor::class, function (MockInterface $mock) use ($author) {
+        $this->instance(
+            WriteAuthor::class,
+            Mockery::mock(WriteAuthor::class, function (MockInterface $mock) use ($author): void {
                 $mock->shouldReceive('create')->once()->andReturn($author);
-            }));
+            })
+        );
 
 
         $user = User::factory()->make();

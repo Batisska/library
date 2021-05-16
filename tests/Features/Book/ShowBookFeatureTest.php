@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Book;
 
 use App\Data\Models\Author;
@@ -23,7 +25,7 @@ class ShowBookFeatureTest extends TestCase
 
         $book->setRelation('authors', $authors);
 
-        $this->instance(ReadBook::class, Mockery::mock(ReadBook::class, function (MockInterface $mock) use ($book) {
+        $this->instance(ReadBook::class, Mockery::mock(ReadBook::class, function (MockInterface $mock) use ($book): void {
             $mock->shouldReceive('find')->once()->andReturn($book);
         }));
 

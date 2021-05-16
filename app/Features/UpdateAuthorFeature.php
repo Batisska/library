@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Data\Models\Author;
@@ -37,7 +39,7 @@ class UpdateAuthorFeature extends Feature
             'last_name' => $request->last_name,
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $author
         ]);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
@@ -25,7 +27,6 @@ class GetAuthorJobTest extends TestCase
 
         $result = $job->handle($stub);
 
-        self::assertEquals($result->id,$author->id);
-
+        self::assertEquals($result->id, $author->id);
     }
 }

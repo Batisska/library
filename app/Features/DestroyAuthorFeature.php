@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Data\Models\Author;
@@ -21,20 +23,20 @@ class DestroyAuthorFeature extends Feature
      * @param int $author_id
      */
     public function __construct(int $author_id)
-   {
-       $this->author_id = $author_id;
-   }
+    {
+        $this->author_id = $author_id;
+    }
 
     /**
      * @return JsonResponse
      */
     public function handle(): JsonResponse
     {
-        $destroy = $this->run(DestroyAuthorJob::class,[
+        $destroy = $this->run(DestroyAuthorJob::class, [
             'author_id' => $this->author_id
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $destroy
         ]);
     }

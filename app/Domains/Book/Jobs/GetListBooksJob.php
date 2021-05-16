@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Repository\Book\ReadBook;
@@ -45,6 +47,6 @@ class GetListBooksJob extends Job
      */
     public function handle(ReadBook $book): LengthAwarePaginator
     {
-        return $book->paginate($this->column ?? 'id', $this->desc ?? 'desc',$this->limit ?? 10);
+        return $book->paginate($this->column ?? 'id', $this->desc ?? 'desc', $this->limit ?? 10);
     }
 }

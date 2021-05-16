@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\User\Jobs;
 
 use Illuminate\Http\Request;
@@ -37,7 +39,7 @@ class AuthenticateJob extends Job
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->request->only('email', 'password'), $this->request->filled('remember'))) {
+        if (!Auth::attempt($this->request->only('email', 'password'), $this->request->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -57,9 +59,9 @@ class AuthenticateJob extends Job
      *
      * @throws ValidationException
      */
-    public function ensureIsNotRateLimited()
+    public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -82,6 +84,6 @@ class AuthenticateJob extends Job
      */
     public function throttleKey(): string
     {
-        return Str::lower($this->request->input('email')).'|'.$this->request->ip();
+        return Str::lower($this->request->input('email')) . '|' . $this->request->ip();
     }
 }

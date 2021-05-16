@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Data\Repository\Author\AuthorRepository;
@@ -13,7 +15,10 @@ use App\Data\Repository\User\Token;
 use App\Data\Repository\User\TokenRepository;
 use App\Data\Repository\User\UserRepository;
 use App\Data\Repository\User\WriteUser;
+use App\Features\ShowBookFeature;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\ServiceProvider;
+use ReflectionClass;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(ReadBook::class, BookRepository::class);
         $this->app->bind(WriteBook::class, BookRepository::class);
@@ -41,8 +46,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Domains\Author\Jobs\GetListAuthorsJob;
@@ -16,13 +18,13 @@ class ListAuthorsFeature extends Feature
      */
     public function handle(ListAuthors $request): JsonResponse
     {
-        $books = $this->run(GetListAuthorsJob::class,[
+        $books = $this->run(GetListAuthorsJob::class, [
             'column' => $request->input('column'),
             'desc' => $request->input('desc'),
             'limit' => $request->input('limit'),
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $books
         ]);
     }

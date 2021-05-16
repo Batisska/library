@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Data\Repository\Author;
 
@@ -7,7 +8,6 @@ use App\Data\Models\Author;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
 
 /**
  * Class AuthorRepository
@@ -27,7 +27,7 @@ class AuthorRepository implements ReadAuthor, WriteAuthor
     /**
      * @return Collection|array
      */
-    public function all(): Collection|array
+    public function all(): Collection | array
     {
         return Author::all();
     }
@@ -48,7 +48,7 @@ class AuthorRepository implements ReadAuthor, WriteAuthor
      */
     public function update(int $id, array $attributes): bool
     {
-        return (bool)Author::where('id',$id)->update($attributes);
+        return (bool)Author::where('id', $id)->update($attributes);
     }
 
     /**

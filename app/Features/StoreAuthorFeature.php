@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Domains\Author\Jobs\SaveAuthorJob;
@@ -16,12 +18,12 @@ class StoreAuthorFeature extends Feature
      */
     public function handle(StoreAuthor $request): JsonResponse
     {
-        $author = $this->run(SaveAuthorJob::class,[
+        $author = $this->run(SaveAuthorJob::class, [
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name')
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $author
         ]);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Domains\Author\Jobs\GetAuthorJob;
@@ -28,11 +30,11 @@ class ShowAuthorFeature extends Feature
      */
     public function handle(): JsonResponse
     {
-        $author = $this->run(GetAuthorJob::class,[
+        $author = $this->run(GetAuthorJob::class, [
             'author_id' => $this->author_id
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $author
         ]);
     }

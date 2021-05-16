@@ -10,9 +10,12 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
+        "laravel/horizon": "^5.7",
         "laravel/sanctum": "^2.10",
+        "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "lucidarch/lucid": "^1.0",
+        "predis/predis": "^1.1",
         "spatie/data-transfer-object": "^3.1"
     },
     "require-dev": {
@@ -25,6 +28,7 @@
         "nunomaduro/larastan": "^0.7.3",
         "phpstan/phpstan-mockery": "^0.12.13",
         "phpunit/phpunit": "^9.3.3",
+        "spiral/code-style": "^1.0",
         "vimeo/psalm": "^4.7"
     },
     "autoload": {

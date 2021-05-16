@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
@@ -46,7 +48,7 @@ class UpdateAuthorJob extends Job
      */
     public function handle(WriteAuthor $writeAuthor, ReadAuthor $readAuthor): mixed
     {
-        $writeAuthor->update($this->author_id,[
+        $writeAuthor->update($this->author_id, [
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
         ]);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Features\DestroyBookFeature;
@@ -17,7 +19,7 @@ class BookController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         return $this->serve(ListBooksFeature::class);
     }
@@ -41,7 +43,7 @@ class BookController extends Controller
      */
     public function show(Request $request, int $book_id): JsonResponse
     {
-        return $this->serve(ShowBookFeature::class,[
+        return $this->serve(ShowBookFeature::class, [
             'book_id' => $book_id
         ]);
     }
@@ -54,7 +56,7 @@ class BookController extends Controller
      */
     public function update(int $book_id): JsonResponse
     {
-        return $this->serve(UpdateBookFeature::class,[
+        return $this->serve(UpdateBookFeature::class, [
             'book_id' => $book_id
         ]);
     }
@@ -67,7 +69,7 @@ class BookController extends Controller
      */
     public function destroy(int $book_id): JsonResponse
     {
-        return $this->serve(DestroyBookFeature::class,[
+        return $this->serve(DestroyBookFeature::class, [
             'book_id' => $book_id
         ]);
     }

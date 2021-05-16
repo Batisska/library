@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
@@ -29,9 +31,9 @@ class UpdateAuthorJobTest extends TestCase
         $stub->method('find')
              ->willReturn($updateAuthor);
 
-        $author = $job->handle($stub,$stub);
+        $author = $job->handle($stub, $stub);
 
-        self::assertEquals($updateAuthor->first_name,$author->first_name);
-        self::assertEquals($updateAuthor->last_name,$author->last_name);
+        self::assertEquals($updateAuthor->first_name, $author->first_name);
+        self::assertEquals($updateAuthor->last_name, $author->last_name);
     }
 }

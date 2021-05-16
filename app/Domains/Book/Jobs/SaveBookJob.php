@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
@@ -47,11 +49,11 @@ class SaveBookJob extends Job
      */
     public function handle(WriteBook $book): Model
     {
-         $result = $book->create([
+        $result = $book->create([
             'description' => $this->description,
             'title' => $this->title,
         ]);
 
-        return $book->attach($result, 'authors',$this->author_id);
+        return $book->attach($result, 'authors', $this->author_id);
     }
 }

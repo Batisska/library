@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;

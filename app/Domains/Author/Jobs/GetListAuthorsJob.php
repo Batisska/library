@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
@@ -46,6 +48,6 @@ class GetListAuthorsJob extends Job
      */
     public function handle(ReadAuthor $author): LengthAwarePaginator
     {
-        return $author->paginate($this->column ?? 'id', $this->desc ?? 'desc',$this->limit ?? 10);
+        return $author->paginate($this->column ?? 'id', $this->desc ?? 'desc', $this->limit ?? 10);
     }
 }

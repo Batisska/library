@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Book;
 
 use App\Data\Models\Author;
@@ -23,7 +25,7 @@ class StoreBookFeatureTest extends TestCase
 
         $book->setRelation('authors', $authors);
 
-        $this->instance(WriteBook::class, Mockery::mock(WriteBook::class, function (MockInterface $mock) use ($book) {
+        $this->instance(WriteBook::class, Mockery::mock(WriteBook::class, function (MockInterface $mock) use ($book): void {
             $mock->shouldReceive('create')->once()->andReturn($book);
             $mock->shouldReceive('attach')->once()->andReturn($book);
         }));
@@ -40,7 +42,6 @@ class StoreBookFeatureTest extends TestCase
             ->assertJsonPath('data.description', $book->description)
             ->assertJsonCount(2, 'data.authors')
             ->assertJsonPath('data.authors.*.first_name', $authors->pluck('first_name')->toArray())
-            ->assertJsonPath('data.authors.*.last_name',$authors->pluck('last_name')->toArray());
-
+            ->assertJsonPath('data.authors.*.last_name', $authors->pluck('last_name')->toArray());
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Book;
 
 use App\Data\Models\Book;
@@ -19,19 +21,20 @@ class ListBooksFeatureTest extends TestCase
     {
         $books = Book::factory()->count(5)->make();
 
-        $this->instance(ReadBook::class, Mockery::mock(ReadBook::class, function (MockInterface $mock) use ($books) {
+        $this->instance(ReadBook::class, Mockery::mock(ReadBook::class, function (MockInterface $mock) use ($books): void {
             $paginator = new LengthAwarePaginator(items: $books, total: 10, perPage: 5);
             $mock->shouldReceive('paginate')->once()->andReturn($paginator);
         }));
 
         $user = User::factory()->make();
-
-        $this->actingAs($user)->getJson(route('books.index',[
+        $this->actingAs($user)->getJson(route('books.index', [
             'limit' => 5,
             'column' => 'title',
             'desc' => 'desc',
         ]))
-            ->assertJsonCount(5,'data.data')
-            ->assertSuccessful();
+            ->assertSuccessful()
+             ->assertJsonCount(5, 'data.data')
+        ;
+
     }
 }

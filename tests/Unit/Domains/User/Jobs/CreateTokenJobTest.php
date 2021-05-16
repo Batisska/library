@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\User\Jobs;
 
 use App\Data\Models\PersonalAccessToken;
@@ -36,7 +38,7 @@ class CreateTokenJobTest extends TestCase
 
         $plainTextToken = $newPersonalToken->getKey() . '|' . Str::random(40);
 
-        $newPersonalToken = new NewAccessToken($newPersonalToken,$plainTextToken);
+        $newPersonalToken = new NewAccessToken($newPersonalToken, $plainTextToken);
 
         $stub->method('createToken')->willReturn($newPersonalToken);
 

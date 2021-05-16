@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Repository\Book\ReadBook;
@@ -30,7 +32,7 @@ class UpdateBookJob extends Job
      * @param string $title
      * @param string $description
      */
-    public function __construct(int $book_id,string $title, string $description)
+    public function __construct(int $book_id, string $title, string $description)
     {
         $this->title = $title;
         $this->description = $description;
@@ -45,7 +47,7 @@ class UpdateBookJob extends Job
      */
     public function handle(WriteBook $book, ReadBook $readBook): mixed
     {
-        $book->update($this->book_id,[
+        $book->update($this->book_id, [
             'title' => $this->title,
             'description' => $this->description,
         ]);

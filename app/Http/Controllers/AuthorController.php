@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Features\DestroyAuthorFeature;
@@ -39,7 +41,7 @@ class AuthorController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        return $this->serve(ShowAuthorFeature::class,[
+        return $this->serve(ShowAuthorFeature::class, [
             'author_id' => $id
         ]);
     }
@@ -52,7 +54,7 @@ class AuthorController extends Controller
      */
     public function update(int $id): JsonResponse
     {
-        return $this->serve(UpdateAuthorFeature::class,[
+        return $this->serve(UpdateAuthorFeature::class, [
             'author_id' => $id
         ]);
     }
@@ -65,7 +67,7 @@ class AuthorController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
-        return $this->serve(DestroyAuthorFeature::class,[
+        return $this->serve(DestroyAuthorFeature::class, [
             'author_id' => $id
         ]);
     }

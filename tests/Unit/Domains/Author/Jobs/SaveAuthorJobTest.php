@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
@@ -28,7 +30,7 @@ class SaveAuthorJobTest extends TestCase
 
         $result = $job->handle($stub);
 
-        self::assertEquals($author->first_name,$result['first_name']);
-        self::assertEquals($author->last_name,$result['last_name']);
+        self::assertEquals($author->first_name, $result['first_name']);
+        self::assertEquals($author->last_name, $result['last_name']);
     }
 }

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Book\Jobs;
 
 use App\Data\Models\Book;
 use App\Data\Repository\Book\ReadBook;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Lucid\Units\Job;
 
 class GetBookByIdJob extends Job

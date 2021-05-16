@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Data\Repository\Book;
 
@@ -26,7 +27,7 @@ class BookRepository implements ReadBook, WriteBook
     /**
      * @return Collection|array
      */
-    public function all(): Collection|array
+    public function all(): Collection | array
     {
         return Book::all();
     }
@@ -47,7 +48,7 @@ class BookRepository implements ReadBook, WriteBook
      */
     public function update(int $id, array $attributes): bool
     {
-        return (bool)Book::where('id',$id)->update($attributes);
+        return (bool)Book::where('id', $id)->update($attributes);
     }
 
     /**

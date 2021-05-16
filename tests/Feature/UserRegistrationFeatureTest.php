@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Data\Models\PersonalAccessToken;
@@ -17,15 +19,15 @@ class UserRegistrationFeatureTest extends TestCase
     /**
      * @return void
      */
-    public function test_user_registration_feature(): void
+    public function testUserRegistrationFeature(): void
     {
         $data = User::factory()->make();
 
-        $this->instance(WriteUser::class, Mockery::mock(WriteUser::class, function (MockInterface $mock) use ($data) {
+        $this->instance(WriteUser::class, Mockery::mock(WriteUser::class, function (MockInterface $mock) use ($data): void {
             $mock->shouldReceive('create')->andReturn($data);
         }));
 
-        $this->instance(Token::class, Mockery::mock(Token::class, function (MockInterface $mock) use ($data) {
+        $this->instance(Token::class, Mockery::mock(Token::class, function (MockInterface $mock) use ($data): void {
             $mock->shouldReceive('tokens')->andReturn($data->tokens());
             $mock->shouldReceive('delete')->andReturn(true);
 

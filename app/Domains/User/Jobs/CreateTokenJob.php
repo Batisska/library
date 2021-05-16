@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\User\Jobs;
 
 use App\Data\Models\User;
@@ -43,6 +45,6 @@ class CreateTokenJob extends Job
 
         $token->delete($tokens);
 
-        return $token->createToken($this->user,$this->device);
+        return $token->createToken($this->user, $this->device);
     }
 }

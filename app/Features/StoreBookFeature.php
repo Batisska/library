@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Domains\Book\Jobs\SaveBookJob;
@@ -22,7 +24,7 @@ class StoreBookFeature extends Feature
             'author_id' => $request->input('author_id'),
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $book
         ]);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Author;
 
 use App\Data\Models\Author;
@@ -27,15 +29,19 @@ class UpdateAuthorFeatureTest extends TestCase
     {
         $author = Author::factory()->make();
 
-        $this->instance(WriteAuthor::class,
-            Mockery::mock(WriteAuthor::class, function (MockInterface $mock) {
-            $mock->shouldReceive('update')->andReturn(true);
-        }));
+        $this->instance(
+            WriteAuthor::class,
+            Mockery::mock(WriteAuthor::class, function (MockInterface $mock): void {
+                $mock->shouldReceive('update')->andReturn(true);
+            })
+        );
 
-        $this->instance(ReadAuthor::class,
-            Mockery::mock(ReadAuthor::class, function (MockInterface $mock) use ($author) {
+        $this->instance(
+            ReadAuthor::class,
+            Mockery::mock(ReadAuthor::class, function (MockInterface $mock) use ($author): void {
                 $mock->shouldReceive('find')->andReturn($author);
-            }));
+            })
+        );
 
         $user = User::factory()->make();
 

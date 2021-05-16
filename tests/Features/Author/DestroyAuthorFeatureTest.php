@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Author;
 
 use App\Data\Models\User;
@@ -23,7 +25,7 @@ class DestroyAuthorFeatureTest extends TestCase
     {
         $user = User::factory()->make();
 
-        $this->instance(WriteAuthor::class, Mockery::mock(WriteAuthor::class, function (MockInterface $mock) {
+        $this->instance(WriteAuthor::class, Mockery::mock(WriteAuthor::class, function (MockInterface $mock): void {
             $mock->shouldReceive('destroy')->once()->andReturn(true);
         }));
 

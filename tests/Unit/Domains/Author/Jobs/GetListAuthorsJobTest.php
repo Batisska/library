@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\Author\Jobs;
 
 use App\Data\Models\Author;
@@ -26,7 +28,7 @@ class GetListAuthorsJobTest extends TestCase
             'orderBy' => 'desc',
         ];
 
-        $job = new GetListAuthorsJob($data['order'],$data['orderBy'],$data['limit']);
+        $job = new GetListAuthorsJob($data['order'], $data['orderBy'], $data['limit']);
 
         $stub = $this->createMock(originalClassName: ReadAuthor::class);
 
@@ -38,6 +40,5 @@ class GetListAuthorsJobTest extends TestCase
 
         self::assertCount(5, $result->items());
         self::assertEquals(10, $result->total());
-
     }
 }

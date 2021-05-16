@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Features\Author;
 
 use App\Data\Models\Author;
@@ -28,17 +30,17 @@ class ShowAuthorFeatureTest extends TestCase
 
         $user = User::factory()->make();
 
-        $this->instance(ReadAuthor::class, Mockery::mock(ReadAuthor::class, function (MockInterface $mock) use ($author) {
+        $this->instance(ReadAuthor::class, Mockery::mock(ReadAuthor::class, function (MockInterface $mock) use ($author): void {
             $mock->shouldReceive('find')->once()->andReturn($author);
         }));
 
 
         $this->actingAs($user)->getJson(route('authors.show', 1))
             ->assertSuccessful()
-            ->assertJsonPath('data.id',$author->id)
-            ->assertJsonPath('data.books.*.id',$books->pluck('id')->toArray())
-            ->assertJsonPath('data.books.*.title',$books->pluck('title')->toArray())
-            ->assertJsonPath('data.books.*.description',$books->pluck('description')->toArray())
+            ->assertJsonPath('data.id', $author->id)
+            ->assertJsonPath('data.books.*.id', $books->pluck('id')->toArray())
+            ->assertJsonPath('data.books.*.title', $books->pluck('title')->toArray())
+            ->assertJsonPath('data.books.*.description', $books->pluck('description')->toArray())
         ;
     }
 }

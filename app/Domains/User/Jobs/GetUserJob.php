@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\User\Jobs;
 
 use App\Data\Models\User;
@@ -33,6 +35,6 @@ class GetUserJob extends Job
      */
     public function handle(ReadUser $user): Model
     {
-        return $user->firstOrFail('email',$this->email);
+        return $user->firstOrFail('email', $this->email);
     }
 }

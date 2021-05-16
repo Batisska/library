@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\User\Jobs;
 
 use App\Domains\User\Jobs\AuthenticateJob;

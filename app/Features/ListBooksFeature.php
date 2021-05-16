@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Domains\Book\Jobs\GetListBooksJob;
@@ -16,13 +18,13 @@ class ListBooksFeature extends Feature
      */
     public function handle(ListBooks $request): JsonResponse
     {
-        $books = $this->run(GetListBooksJob::class,[
+        $books = $this->run(GetListBooksJob::class, [
             'column' => $request->input('column'),
             'desc' => $request->input('desc'),
             'limit' => $request->input('limit'),
         ]);
 
-       return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $books
         ]);
     }

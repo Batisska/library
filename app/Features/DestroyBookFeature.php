@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features;
 
 use App\Data\Models\Book;
@@ -30,11 +32,11 @@ class DestroyBookFeature extends Feature
      */
     public function handle(): JsonResponse
     {
-        $destroy = $this->run(DestroyBookJob::class,[
+        $destroy = $this->run(DestroyBookJob::class, [
             'book_id' => $this->book_id
         ]);
 
-        return $this->run(RespondWithJsonJob::class,[
+        return $this->run(RespondWithJsonJob::class, [
             'content' => $destroy
         ]);
     }

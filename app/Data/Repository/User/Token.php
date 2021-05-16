@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Data\Repository\User;
 
-use App\Data\Models\PersonalAccessToken;
 use App\Data\Models\User;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Laravel\Sanctum\NewAccessToken;
@@ -30,5 +30,5 @@ interface Token
      * @param MorphMany $tokens
      * @return bool|null
      */
-    public function delete(MorphMany $tokens): bool|null;
+    public function delete(MorphMany $tokens): bool | null;
 }

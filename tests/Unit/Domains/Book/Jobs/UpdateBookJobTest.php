@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Domains\Book\Jobs;
 
 use App\Data\Models\Author;
@@ -19,8 +21,8 @@ class UpdateBookJobTest extends TestCase
 
         $book = Book::factory()->hasAttached($authors)->make();
 
-        $title = $book->title.'_update';
-        $description = $book->description.'_update';
+        $title = $book->title . '_update';
+        $description = $book->description . '_update';
 
         $job = new UpdateBookJob(1, $title, $description);
 
@@ -36,10 +38,10 @@ class UpdateBookJobTest extends TestCase
                 'authors' => $authors->toArray()
             ]);
 
-        $result = $job->handle($stub,$stub);
+        $result = $job->handle($stub, $stub);
 
-        self::assertEquals($title,$result['title']);
-        self::assertEquals($description,$result['description']);
-        self::assertEquals($result['authors'],$authors->toArray());
+        self::assertEquals($title, $result['title']);
+        self::assertEquals($description, $result['description']);
+        self::assertEquals($result['authors'], $authors->toArray());
     }
 }
