@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Laravel\Sanctum\Sanctum;
 
 /**
  * @method static whereEmail(string $email)
@@ -63,5 +63,13 @@ class User extends Authenticatable
     public function tokens(): MorphMany
     {
         return $this->morphMany(PersonalAccessToken::class, 'tokenable');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function books(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class)->withPivot(['return_at', 'returned_at']);
     }
 }

@@ -30,7 +30,7 @@ class Registration extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'name' => 'required',
             'password' => 'required|confirmed',
         ];

@@ -32,4 +32,13 @@ interface WriteUser
      * @return bool
      */
     public function destroy(int $id): bool;
+
+    /**
+     * @param Model $model
+     * @param string $relation
+     * @param array $ids
+     * @param array $attributes
+     * @return Model
+     */
+    public function attach(Model $model, string $relation, array $ids, array $attributes = []): Model;
 }
