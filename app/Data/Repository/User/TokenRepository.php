@@ -31,10 +31,10 @@ class TokenRepository implements Token
 
     /**
      * @param MorphMany $tokens
-     * @return bool|null
+     * @return bool
      */
-    public function delete(MorphMany $tokens): bool | null
+    public function delete(MorphMany $tokens): bool
     {
-        return $tokens->delete();
+        return (bool)$tokens->delete();
     }
 }

@@ -14,7 +14,7 @@
         "laravel/sanctum": "^2.10",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
-        "lucidarch/lucid": "^1.0",
+        "lucidarch/lucid": "dev-main",
         "predis/predis": "^1.1",
         "spatie/data-transfer-object": "^3.1"
     },

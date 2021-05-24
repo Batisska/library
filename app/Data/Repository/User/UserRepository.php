@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Repository\User;
 
 use App\Data\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class UserRepository
@@ -48,7 +49,7 @@ class UserRepository implements ReadUser, WriteUser
      */
     public function update(int $id, array $attributes): bool
     {
-        return (bool)User::where('id', $id)->update($attributes);
+        return (bool)User::where('id', '=',(string)$id)->update($attributes);
     }
 
     /**
@@ -58,5 +59,22 @@ class UserRepository implements ReadUser, WriteUser
     public function create(array $attributes): User
     {
         return User::create($attributes);
+    }
+
+
+    /**
+     * @param Model $model
+     * @param string $relation
+     * @param array $ids
+     * @param array $attributes
+     * @return Model
+     */
+    public function attach(Model $model, string $relation, array $ids, array $attributes = []): Model
+    {
+        $model->{$relation}()->attach($ids, $attributes);
+
+        $model->load($relation);
+
+        return $model;
     }
 }

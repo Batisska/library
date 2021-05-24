@@ -8,6 +8,7 @@ use App\Data\Models\PersonalAccessToken;
 use App\Data\Models\User;
 use App\Data\Repository\User\Token;
 use App\Data\Repository\User\WriteUser;
+use App\Domains\User\Requests\Registration;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\NewAccessToken;
 use Mockery;
@@ -21,7 +22,10 @@ class UserRegistrationFeatureTest extends TestCase
      */
     public function testUserRegistrationFeature(): void
     {
+        $this->withoutExceptionHandling();
         $data = User::factory()->make();
+
+
 
         $this->instance(WriteUser::class, Mockery::mock(WriteUser::class, function (MockInterface $mock) use ($data): void {
             $mock->shouldReceive('create')->andReturn($data);
@@ -38,12 +42,17 @@ class UserRegistrationFeatureTest extends TestCase
             $mock->shouldReceive('createToken')->andReturn($newPersonalToken);
         }));
 
-        $this->postJson(route('register'), [
+        $sendData = [
             'email' => $data->email,
             'name' => $data->name,
             'password' => 'password',
             'password_confirmation' => 'password',
-        ])
+        ];
+
+        $request = Registration::create(route('register', $sendData), 'POST');
+        $this->instance(Registration::class, $request);
+
+        $this->postJson(route('register'), $sendData)
              ->assertOk()
              ->assertJsonPath('data.user.email', $data->email)
              ->assertJsonPath('data.user.name', $data->name);

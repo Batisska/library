@@ -32,7 +32,7 @@ class GetListBooksJob extends Job
      * @param string $desc
      * @param int $limit
      */
-    public function __construct(string $column, string $desc, int $limit)
+    public function __construct(string $column = 'id', string $desc = 'desc', int $limit = 10)
     {
         $this->column = $column;
         $this->desc = $desc;
@@ -47,6 +47,6 @@ class GetListBooksJob extends Job
      */
     public function handle(ReadBook $book): LengthAwarePaginator
     {
-        return $book->paginate($this->column ?? 'id', $this->desc ?? 'desc', $this->limit ?? 10);
+        return $book->paginate($this->column, $this->desc , $this->limit);
     }
 }
